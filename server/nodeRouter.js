@@ -8,7 +8,7 @@ const baseRequest = request.defaults({
   baseUrl: bcoinNode,
 });
 
-nodeRouter.use((req, res, next) => {
+nodeRouter.use((req, res) => {
   const options = {
     method: req.method,
     uri: req.path,
@@ -19,7 +19,6 @@ nodeRouter.use((req, res, next) => {
     }
     return res.status(200).json(JSON.parse(body));
   });
-  next();
 });
 
 module.exports = nodeRouter;
