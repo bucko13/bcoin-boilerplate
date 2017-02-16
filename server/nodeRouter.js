@@ -3,9 +3,8 @@ const request = require('request');
 
 const nodeRouter = express.Router({ mergeParams: true });
 const bcoinPort = 8080;
-const bcoinNode = 'http://localhost:'.concat(bcoinPort);
 const baseRequest = request.defaults({
-  baseUrl: bcoinNode,
+  baseUrl: 'http://localhost:'.concat(bcoinPort),
 });
 
 nodeRouter.use((req, res) => {

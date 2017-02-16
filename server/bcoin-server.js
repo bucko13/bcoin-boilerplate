@@ -1,4 +1,4 @@
-const bcoin = require('../bcoin/lib/bcoin');
+const bcoin = require('bcoin');
 const API_KEY = require('../config.js').BCOIN_API_KEY;
 
 const SPVNode = bcoin.spvnode;
@@ -15,10 +15,6 @@ const node = new SPVNode(options);
 node.on('error', () => {
   ; // eslint-disable-line no-extra-semi
 });
-
-// node.chain.on('block', (data) => {
-//   console.log('got a block!', data);
-// });
 
 node.open().then(() => {
   node.connect().then(() => {
