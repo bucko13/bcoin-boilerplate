@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "bcoin": "file:bcoin",
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
     "request": "^2.79.0"
   },

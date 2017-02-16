@@ -7,6 +7,8 @@ const options = bcoin.config({
   network: 'testnet',
   walletauth: true,
   passphrase: API_KEY,
+  apiKey: API_KEY,
+  // logLevel: 'info',
 });
 bcoin.set(options);
 

@@ -1,10 +1,14 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const nodeRouter = require('./nodeRouter.js');
+const cookieParser = require('cookie-parser');
 
 const app = express();
-
 app.set('port', (process.env.PORT || 5000));
+
+app.use(cookieParser());
+app.use(bodyParser.json());
 app.use('/node', nodeRouter);
 
 app.get('/', (req, res) => {
