@@ -15,7 +15,6 @@ nodeRouter.use((req, res) => {
     json: true,
     qs: req.query,
   };
-  console.log('here are the options: ', options);
   baseRequest(options, (err, resp, body) => {
     if (err) {
       return res.status(400).send({ error: err });

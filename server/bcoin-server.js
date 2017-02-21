@@ -13,12 +13,19 @@ const options = bcoin.config({
 bcoin.set(options);
 
 const node = new SPVNode(options);
+const walletdb = bcoin.walletdb({
+  location: process.env.HOME.concat('/walletdb'),
+  db: 'leveldb',
+  name: 'my wallet db',
+});
+
+node.walletdb = walletdb;
 
 node.on('error', () => {
   ; // eslint-disable-line no-extra-semi
 });
-
-node.open().then(() => {
+node.open()
+.then(() => {
   node.connect().then(() => {
     node.startSync();
   });

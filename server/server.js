@@ -9,6 +9,8 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../client')));
+
 app.use('/node', nodeRouter);
 
 app.get('/', (req, res) => {
