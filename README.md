@@ -5,7 +5,13 @@ This repo is to help you get up and running with a bcoin project on node
 ## Includes
 
 ## Steps to Run
-* navigate to project directory, run `node server/server.js` and in another session `node server/bcoin-server.js`
+* navigate to project directory
+* run `node server/server.js`
+* in another session `node server/bcoin-server.js`
+* send bcoin requests to http://localhost:5000/node/
+* open client on http://localhost:5000
+
+Nodejs server runs on port 5000 by default and acts as a router sending any requests to /node/ to the bcoin node (which runs on port 8080)
 
 ## Notes
 * uses eslint with airbnb configs. These are quite strict but make the code nice and consistent, enforcing ES6 notation where possible. This can be changed via the .eslintrc.json config file.
