@@ -3,6 +3,7 @@
 const express = require('express');
 const request = require('request');
 const auth = require('basic-auth');
+const API_KEY = require('../config.js').BCOIN_API_KEY;
 
 const nodeRouter = express.Router({ mergeParams: true });
 const bcoinPort = 8080;
@@ -19,7 +20,13 @@ nodeRouter.use((req, res) => {
       pass: auth(req).pass,
       sendImmediately: false,
     };
+  } else if (API_KEY) {
+    authorization = {
+      user: '',
+      pass: API_KEY,
+    };
   }
+
   const options = {
     method: req.method,
     uri: req.path,
@@ -28,6 +35,7 @@ nodeRouter.use((req, res) => {
     qs: req.query,
     auth: authorization,
   };
+
   baseRequest(options, (err, resp, body) => {
     if (err) {
       return res.status(400).send({ error: err });

@@ -3,13 +3,42 @@
 <body>
 
 <h1>Hello World</h1>
+<span class="api-key">API Key: <input type="text" name="apiKey" /></span>
+
 <h2>Create Wallet</h2>
-<form class="create-wallet">
+<form class="create wallet">
   <strong>Wallet ID</strong>
   <input type="text" name="walletId" class="wallet-id" />
   <strong>Wallet Passphrase</strong>
   <input type="password" name="passphrase" class="wallet-passphrase"/>
-  <button class="new-wallet">Submit</button>
+  <button class="wallet new-wallet" data-action="create">Submit</button>
+</form>
+
+<h2>Get Wallet Information</h2>
+<form class="get wallet">
+  <strong>Wallet ID</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <button class="wallet get-wallet" data-action="get">Submit</button>
+</form>
+
+<h2>Send Transaction</h2>
+<form class="send transaction">
+  <strong>Wallet ID to Send From:</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <br />
+  <strong>Wallet Passphrase:</strong>
+  <input type="password" name="passphrase" class="wallet-passphrase"/>
+  <br />
+  <strong>Destination Address:</strong>
+  <input type="text" name="destination" class="tx-address"/>
+  <br />
+  <strong>Miner Fee</strong>
+  <input type="number" name="fee" class="tx-fee" min="0" step=".0001"/>
+  <br />
+  <strong>Amount to send:</strong>
+  <input type="number" name="tx-amount" class="tx-amount" min="0" />
+  <br />
+  <button class="tx send-tx" data-action="sendTx">Submit</button>
 </form>
 <div class="server-messages"></div>
 

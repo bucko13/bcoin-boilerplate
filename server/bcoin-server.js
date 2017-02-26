@@ -11,7 +11,7 @@ const options = bcoin.config({
   coinCache: 30000000,
   query: true,
   passphrase: API_KEY,
-  apiKey: '12345',
+  apiKey: API_KEY,
   pruned: true,
   db: 'leveldb',
   logLevel: 'info',
@@ -29,18 +29,16 @@ node.pool.on('open', () => {
 });
 
 node.mempool.on('tx', (tx) => {
-  console.log('******** Saw tx: ', tx);
+  // console.log('******** Saw tx: ', tx);
 });
 
 
 node.chain.on('block', () => {
-  console.log('new block found. Chain State tx: ', node.chain.tip);
+  // console.log('new block found. Chain State tx: ', node.chain.tip);
 });
 
 node.open()
 .then(() => node.connect())
-.then(() => {
-  node.startSync();
-});
+.then(() => node.startSync());
 
 node.http.listen(port, '127.0.0.1');
