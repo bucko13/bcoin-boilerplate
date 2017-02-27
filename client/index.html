@@ -11,14 +11,21 @@
   <input type="text" name="walletId" class="wallet-id" />
   <strong>Wallet Passphrase</strong>
   <input type="password" name="passphrase" class="wallet-passphrase"/>
-  <button class="wallet new-wallet" data-action="create">Submit</button>
+  <button class="wallet new-wallet" data-action="createWallet">Submit</button>
 </form>
 
 <h2>Get Wallet Information</h2>
 <form class="get wallet">
   <strong>Wallet ID</strong>
   <input type="text" name="walletId" class="wallet-id" />
-  <button class="wallet get-wallet" data-action="get">Submit</button>
+  <button class="wallet get-wallet" data-action="getWallet">Submit</button>
+</form>
+
+<h2>Get New Address</h2>
+<form class="get address">
+  <strong>Wallet ID</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <button class="wallet get-address" data-action="getAddress">Submit</button>
 </form>
 
 <h2>Send Transaction</h2>
@@ -40,6 +47,69 @@
   <br />
   <button class="tx send-tx" data-action="sendTx">Submit</button>
 </form>
+
+<h2>Create Multisig Wallet</h2>
+<form class="send transaction">
+  <strong>Wallet ID:</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <br />
+  <strong>Wallet Passphrase:</strong>
+  <input type="password" name="passphrase" class="wallet-passphrase"/>
+  <br />
+  <strong>Number of potential signers (N)</strong>
+  <input type="number" name="n" class="wallet-n" value="3" />
+  <br />
+  <strong>Minimum number of signers (M)</strong>
+  <input type="number" name="m" class="wallet-m" value="2" />
+  <br />
+  <button class="tx send-tx" data-action="createMultisig">Submit</button>
+</form>
+
+<h2>Add xpubkey/accountKey to Multisig</h2>
+<form class="add multisig-address">
+  <strong>Target Wallet:</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <br />
+  <strong>Public Key</strong>
+  <input type="text" name="accountKey" class="key public-key" />
+  <br />
+  <button class="multisig-key" data-action="addKey"> Submit</button>
+</form>
+
+<h2>Template TX (useful for multisig)</h2>
+<form class="send transaction">
+  <strong>Wallet ID to Send From:</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <br />
+  <strong>Wallet Passphrase:</strong>
+  <input type="password" name="passphrase" class="wallet-passphrase"/>
+  <br />
+  <strong>Destination Address:</strong>
+  <input type="text" name="destination" class="tx-address"/>
+  <br />
+  <strong>Miner Fee</strong>
+  <input type="number" name="fee" class="tx-fee" min="0" step=".0001"/>
+  <br />
+  <strong>Amount to send:</strong>
+  <input type="number" name="tx-amount" class="tx-amount" min="0" />
+  <br />
+  <button class="tx send-tx" data-action="createTx">Submit</button>
+</form>
+
+<h2>Sign TX (useful for multisig)</h2>
+<form class="send transaction" id="signTx">
+  <strong>Wallet ID to sign with:</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <br />
+  <strong>Wallet Passphrase:</strong>
+  <input type="password" name="passphrase" class="wallet-passphrase"/>
+  <br />
+  <strong>Transaction:</strong>
+  <textarea name="tx" form="signTx" class="tx"></textarea>
+  <br />
+  <button class="tx send-tx" data-action="signTx">Submit</button>
+</form>
+
 <div class="server-messages"></div>
 
 <script

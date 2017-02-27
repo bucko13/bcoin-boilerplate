@@ -4,6 +4,7 @@ const express = require('express');
 const request = require('request');
 const auth = require('basic-auth');
 const API_KEY = require('../config.js').BCOIN_API_KEY;
+// require('request').debug = true;
 
 const nodeRouter = express.Router({ mergeParams: true });
 const bcoinPort = 8080;

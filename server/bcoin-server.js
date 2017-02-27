@@ -14,7 +14,7 @@ const options = bcoin.config({
   apiKey: API_KEY,
   pruned: true,
   db: 'leveldb',
-  logLevel: 'info',
+  logLevel: 'debug',
 });
 bcoin.set(options);
 

@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "basic-auth": "^1.1.0",
-    "bcoin": "file:bcoin",
+    "bcoin": "^1.0.0-beta.3",
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
