@@ -39,7 +39,7 @@
   <strong>Destination Address:</strong>
   <input type="text" name="destination" class="tx-address"/>
   <br />
-  <strong>Miner Fee</strong>
+  <strong>TX Fee Rate (per KB)</strong>
   <input type="number" name="fee" class="tx-fee" min="0" step=".0001"/>
   <br />
   <strong>Amount to send:</strong>
@@ -87,7 +87,7 @@
   <strong>Destination Address:</strong>
   <input type="text" name="destination" class="tx-address"/>
   <br />
-  <strong>Miner Fee</strong>
+  <strong>TX Fee Rate (per KB)</strong>
   <input type="number" name="fee" class="tx-fee" min="0" step=".0001"/>
   <br />
   <strong>Amount to send:</strong>
@@ -110,12 +110,29 @@
   <button class="tx send-tx" data-action="signTx">Submit</button>
 </form>
 
+<h2>Add Data to the Blockchain (OP_RETURN)</h2>
+<form class="add data" id="addData">
+  <strong>Wallet ID (will pay fees)</strong>
+  <input type="text" name="walletId" class="wallet-id" />
+  <br />
+  <strong>Wallet Passphrase:</strong>
+  <input type="password" name="passphrase" class="wallet-passphrase"/>
+  <br />
+  <strong>TX Fee Rate (per KB)</strong>
+  <input type="number" name="fee" class="tx-fee" min="0" step=".0001"/>
+  <br />
+  <strong>Data</strong>
+  <textarea name="data" form="addData" class="data-field"></textarea>
+  <button class="tx send-tx" data-action="addData">Submit</button>
+</form>
+
 <div class="server-messages"></div>
 
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+<script src="/bcoin.min.js"></script>
 <script src="/index.js"></script>
 </body>
 </html>

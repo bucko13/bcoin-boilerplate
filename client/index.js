@@ -50,6 +50,10 @@ $(function() {
         type: 'POST',
         reqFunc: signTransaction,
       },
+      addData: {
+        type: 'POST',
+        reqFunc: addData,
+      }
     }
 
     const form = $(this).parent();
@@ -225,7 +229,6 @@ $(function() {
     const tx = JSON.parse(form.find('textarea[name="tx"]').val());
 
     const data = {passphrase, tx};
-    console.log('data: ', data);
 
     return $.ajax({
       type: 'POST',
@@ -238,4 +241,37 @@ $(function() {
       contentType: 'application/json'
     });
   }
+
+  function addData(form, action, walletId) {
+    const passphrase = form.find('input.wallet-passphrase').val();
+    const rate = form.find('input[name="fee"]').val();
+    const data = form.find('textarea[name="data"]').val();
+    const opcodes = bcoin.script.opcodes;
+    let script = new bcoin.script();
+
+    script.push(opcodes.OP_RETURN);
+    script.push(data);
+    script.compile();
+
+    script = script.toJSON();
+    const outputs = {
+      rate,
+      passphrase,
+      outputs: [{
+        value: 0,
+        script,
+      }],
+    };
+
+    return $.ajax({
+        type: 'POST',
+        url: '/node/wallet/'.concat(walletId, '/send'),
+        data: JSON.stringify(outputs),
+        processData: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Basic " + btoa('' + ":" + apiKey.val()));
+        },
+        contentType: 'application/json'
+      });
+  };
 });
