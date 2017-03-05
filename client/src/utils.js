@@ -1,10 +1,7 @@
-// bcoin objects
-/* globals
-bcoin
-*/
-
-const MTX = bcoin.mtx;
-const Script = bcoin.script;
+// const bcoin = require('bcoin');
+import { mtx as MTX, script as Script } from 'bcoin';
+// const MTX = bcoin.mtx;
+// const Script = bcoin.script;
 
 const getWalletId = form => form.find('input.wallet-id').val();
 const getWalletPassphrase = form => form.find('input.wallet-passphrase').val();
@@ -35,8 +32,8 @@ export const reqUrl = (form, action) => {
     getWallet: `/wallet/${getWalletId(form)}`,
     getAddress: `/wallet/${getWalletId(form)}/address`,
     sendTx: `/wallet/${getWalletId(form)}/send`,
-    createMultisig: '/node/wallet',
-    addKey: `/node/wallet/${getWalletId(form)}/shared-key`,
+    createMultisig: '/wallet',
+    addKey: `/wallet/${getWalletId(form)}/shared-key`,
     createTx: `/wallet/${getWalletId(form)}/create`,
     signTx: `/wallet/${getWalletId(form)}/sign`,
     addData: `/wallet/${getWalletId(form)}/send`,
