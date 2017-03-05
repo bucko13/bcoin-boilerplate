@@ -1,11 +1,6 @@
 import $ from 'jquery';
 import { reqUrl, reqData, reqType, checkInputs } from './utils';
 
-// window.$ = $;
-/* globals
-  bcoin
-*/
-
 $(() => {
   const formActionButton = $('form button');
   const messageContainer = $('.server-messages');

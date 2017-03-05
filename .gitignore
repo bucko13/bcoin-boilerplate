@@ -2,3 +2,4 @@
 .Trash
 node_modules/*
 /config.js
+build.js

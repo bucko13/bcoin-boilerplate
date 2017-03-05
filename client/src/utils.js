@@ -1,7 +1,4 @@
-// const bcoin = require('bcoin');
 import { mtx as MTX, script as Script } from 'bcoin';
-// const MTX = bcoin.mtx;
-// const Script = bcoin.script;
 
 const getWalletId = form => form.find('input.wallet-id').val();
 const getWalletPassphrase = form => form.find('input.wallet-passphrase').val();
