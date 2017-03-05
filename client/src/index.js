@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { reqProps, checkInputs } from './utils';
+window.$ = $;
 
 $(() => {
   const formActionButton = $('form button');

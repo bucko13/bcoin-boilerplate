@@ -26,14 +26,9 @@ export const reqProps = (form) => {
     createWallet: {
       type: 'POST',
       url: '/wallet',
-      data: {
-        id,
-        passphrase,
-        type: 'pubkeyhash',
-      },
+      data: { id, passphrase, type: 'pubkeyhash' },
     },
-    getWallet: { type: 'GET', url: `/wallet/${id}`,
-    },
+    getWallet: { type: 'GET', url: `/wallet/${id}` },
     getAddress: { type: 'POST', url: `/wallet/${id}/address` },
     sendTx: {
       type: 'POST',
@@ -68,10 +63,7 @@ export const reqProps = (form) => {
       data: {
         rate,
         passphrase,
-        outputs: [{
-          value,
-          address: destinationAddress,
-        }],
+        outputs: [{ value, address: destinationAddress }],
       },
     },
     signTx: {
@@ -100,18 +92,19 @@ export const reqProps = (form) => {
 };
 
 export const checkInputs = (action, form) => {
-  const walletId = form.find('input.wallet-id');
-  const walletPassphrase = form.find('input.wallet-passphrase');
+  const idField = form.find('input[name="walletId"]');
+  const passphraseField = form.find('input[name="passphrase"]');
+  const id = getValFromForm(form, 'input', 'walletId');
+  const passphrase = getValFromForm(form, 'input', 'passphrase');
 
   // some simple form validation
-  if ((action === 'createWallet' || action === 'sendTx')
-      && (!walletId.val().length || !walletPassphrase.val().length)) {
-    // create wallet and send transaction both need a passphrase
-    alert('Provide an id and a passphrase');
-    return false;
-  } else if (action === 'getWallet' && !walletId.val().length) {
-    // get wallet only needs wallet id
-    alert('Provide an id');
+  if (idField.length && passphraseField.length) {
+    if (!id.length || !passphrase.length) {
+      alert('Provide an id and a passphrase'); // eslint-disable-line no-alert, no-undef
+      return false;
+    }
+  } else if (idField.length && !id.length) {
+    alert('Please provide a wallet id'); // eslint-disable-line no-alert, no-undef
     return false;
   }
 
