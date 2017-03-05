@@ -1,15 +1,6 @@
 import { mtx as MTX, script as Script } from 'bcoin';
 
-const getWalletId = form => form.find('input.wallet-id').val();
-const getWalletPassphrase = form => form.find('input.wallet-passphrase').val();
-const getRate = form => form.find('input[name="fee"]').val();
-const getAddress = form => form.find('input[name="destination"]').val();
-const getValue = form => form.find('input[name="tx-amount"]').val();
-const getM = form => form.find('input[name="m"]').val();
-const getN = form => form.find('input[name="n"]').val();
-const getAccountKey = form => form.find('input[name="accountKey"]').val();
-const getTx = form => form.find('textarea[name="tx"]').val();
-const getData = form => form.find('textarea[name="data"]').val();
+const getValFromForm = (form, type, name) => form.find(`${type}[name="${name}"]`).val();
 
 const makeScript = (data) => {
   const opcodes = Script.opcodes;
@@ -21,93 +12,92 @@ const makeScript = (data) => {
   return script.toJSON();
 };
 
-export const reqUrl = (form, action) => {
-  const nodeEndpoint = '/node';
+export const reqProps = (form) => {
+  const id = getValFromForm(form, 'input', 'walletId');
+  const passphrase = getValFromForm(form, 'input', 'passphrase');
+  const value = getValFromForm(form, 'input', 'tx-amount');
+  const rate = getValFromForm(form, 'input', 'fee');
+  const destinationAddress = getValFromForm(form, 'input', 'destination');
+  const tx = getValFromForm(form, 'textarea', 'tx');
+  const data = getValFromForm(form, 'textarea', 'data');
 
-  const endpointMap = {
-    createWallet: '/wallet',
-    getWallet: `/wallet/${getWalletId(form)}`,
-    getAddress: `/wallet/${getWalletId(form)}/address`,
-    sendTx: `/wallet/${getWalletId(form)}/send`,
-    createMultisig: '/wallet',
-    addKey: `/wallet/${getWalletId(form)}/shared-key`,
-    createTx: `/wallet/${getWalletId(form)}/create`,
-    signTx: `/wallet/${getWalletId(form)}/sign`,
-    addData: `/wallet/${getWalletId(form)}/send`,
-  };
-  return nodeEndpoint.concat(endpointMap[action]);
-};
-
-export const reqData = (form, action) => {
-  const id = getWalletId(form);
-  const passphrase = getWalletPassphrase(form);
-  const rate = getRate(form);
-  const address = getAddress(form);
-  const value = getValue(form);
-  const m = getM(form);
-  const n = getN(form);
-  const accountKey = getAccountKey(form);
-  const tx = getTx(form);
-  const data = getData(form);
-  const script = data ? makeScript(data) : '';
-
-  const dataMap = {
+  const propsMap = {
+    getFee: { type: 'GET', url: '/fee' },
     createWallet: {
-      id,
-      passphrase,
-      type: 'pubkeyhash',
+      type: 'POST',
+      url: '/wallet',
+      data: {
+        id,
+        passphrase,
+        type: 'pubkeyhash',
+      },
     },
-    getWalletInfo: {},
-    getAddress: {},
+    getWallet: { type: 'GET', url: `/wallet/${id}`,
+    },
+    getAddress: { type: 'POST', url: `/wallet/${id}/address` },
     sendTx: {
-      rate,
-      passphrase,
-      outputs: [{ value, address }],
+      type: 'POST',
+      url: `/wallet/${id}/send`,
+      data: {
+        rate,
+        passphrase,
+        outputs: [{ value, address: destinationAddress }],
+      },
     },
     createMultisig: {
-      id,
-      passphrase,
-      type: 'multisig',
-      m,
-      n,
+      type: 'POST',
+      url: '/wallet',
+      data: {
+        id,
+        passphrase,
+        type: 'multisig',
+        m: getValFromForm(form, 'input', 'm'),
+        n: getValFromForm(form, 'input', 'n'),
+      },
     },
-    addKey: { accountKey },
+    addKey: {
+      type: 'PUT',
+      url: `/wallet/${id}/shared-key`,
+      data: {
+        accountKey: getValFromForm(form, 'input', 'accountKey'),
+      },
+    },
     createTx: {
-      rate,
-      passphrase,
-      outputs: [{
-        value,
-        address,
-      }],
+      type: 'POST',
+      url: `/wallet/${id}/create`,
+      data: {
+        rate,
+        passphrase,
+        outputs: [{
+          value,
+          address: destinationAddress,
+        }],
+      },
     },
     signTx: {
-      passphrase,
-      tx: tx ? MTX.fromOptions(tx) : '',
+      type: 'POST',
+      url: `/wallet/${id}/sign`,
+      data: {
+        passphrase,
+        tx: tx ? MTX.fromOptions(tx) : '',
+      },
     },
     addData: {
-      rate,
-      passphrase,
-      outputs: [{
-        value: 0,
-        script,
-      }],
+      type: 'POST',
+      url: `/wallet/${id}/send`,
+      data: {
+        rate,
+        passphrase,
+        outputs: [{
+          value: 0,
+          script: data ? makeScript(data) : '',
+        }],
+      },
     },
   };
 
-  return JSON.stringify(dataMap[action]);
+  return propsMap;
 };
-
-export const reqType = () => ({
-  createWallet: 'POST',
-  getWallet: 'GET',
-  sendTx: 'POST',
-  getAddress: 'POST',
-  createMultisig: 'POST',
-  addKey: 'PUT',
-  createTx: 'POST',
-  signTx: 'POST',
-  addData: 'POST',
-});
 
 export const checkInputs = (action, form) => {
   const walletId = form.find('input.wallet-id');

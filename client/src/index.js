@@ -1,10 +1,11 @@
 import $ from 'jquery';
-import { reqUrl, reqData, reqType, checkInputs } from './utils';
+import { reqProps, checkInputs } from './utils';
 
 $(() => {
   const formActionButton = $('form button');
   const messageContainer = $('.server-messages');
   const apiKey = $('input[name="apiKey"]');
+  const nodeEndpoint = '/node';
 
   $.get('/node/fee', (data) => {
     const value = data.rate;
@@ -19,14 +20,15 @@ $(() => {
 
     if (!checkInputs(action, form)) return;
 
-    const type = reqType()[action];
-    const url = reqUrl(form, action);
-    const data = reqData(form, action);
+    const reqPropsMap = reqProps(form)[action];
+    const type = reqPropsMap.type;
+    const url = nodeEndpoint.concat(reqPropsMap.url);
+    const data = reqPropsMap.data ? reqPropsMap.data : '';
 
     $.ajax({
       type,
       url,
-      data,
+      data: JSON.stringify(data),
       processData: false,
       beforeSend: (xhr) => {
         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('' + ':' + apiKey.val()));
