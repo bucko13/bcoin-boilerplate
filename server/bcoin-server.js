@@ -15,6 +15,7 @@ const options = bcoin.config({
   pruned: true,
   db: 'leveldb',
   logLevel: 'debug',
+  logFile: true,
 });
 bcoin.set(options);
 

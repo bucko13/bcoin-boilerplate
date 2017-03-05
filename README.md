@@ -4,7 +4,12 @@ This repo is to help you get up and running with a bcoin project on node
 
 ## Includes
 
-## Steps to Run
+## Setup
+* Navigate to project directory
+* run `npm run watch` to build js and output to dist/build.js. Will watch for updates to js in src directory
+* run `npm run build` for prod build (no verbose or source maps or watch)
+
+## Steps to Run Servers
 * navigate to project directory
 * run `node server/server.js`
 * in another session `node server/bcoin-server.js`

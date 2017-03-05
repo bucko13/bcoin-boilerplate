@@ -15,16 +15,16 @@ const baseRequest = request.defaults({
 nodeRouter.use((req, res) => {
   let authorization;
 
-  if (auth(req)) {
+  if (API_KEY) {
+    authorization = {
+      user: '',
+      pass: API_KEY,
+    };
+  } else if (auth(req)) {
     authorization = {
       user: auth(req).name,
       pass: auth(req).pass,
       sendImmediately: false,
-    };
-  } else if (API_KEY) {
-    authorization = {
-      user: '',
-      pass: API_KEY,
     };
   }
 
@@ -36,11 +36,11 @@ nodeRouter.use((req, res) => {
     qs: req.query,
     auth: authorization,
   };
-
   baseRequest(options, (err, resp, body) => {
     if (err) {
       return res.status(400).send({ error: err });
     }
+
     return res.status(200).json(body);
   });
 });

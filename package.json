@@ -2,9 +2,26 @@
   "name": "bcoin-boilerplate",
   "version": "1.0.0",
   "description": "A boilerplate repo to get started with a bcoin based project",
-  "main": "server/server.js",
+  "main": "client/index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "build": "browserify client/src/**/*.js -t babelify --outfile client/dist/build.js --debug ",
+    "watch": "watchify client/src/**/*.js -t babelify --outfile client/dist/build.js --debug --verbose"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "latest"
+          ],
+          "plugins": [
+            "transform-runtime"
+          ]
+        }
+      ]
+    ]
   },
   "author": "Buck Perley",
   "license": "ISC",
@@ -14,15 +31,20 @@
     "body-parser": "^1.16.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
+    "jquery": "^3.1.1",
     "request": "^2.79.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-latest": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0"
+    "eslint-plugin-react": "^6.9.0",
+    "watchify": "^3.9.0"
   }
 }
