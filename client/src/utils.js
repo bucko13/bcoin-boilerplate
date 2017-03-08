@@ -1,6 +1,6 @@
 import { mtx as MTX, script as Script } from 'bcoin';
 
-const getValFromForm = (form, type, name) => form.find(`${type}[name="${name}"]`).val();
+const getValFromForm = (form, name, type = 'input') => form.find(`${type}[name="${name}"]`).val();
 
 const makeScript = (data) => {
   const opcodes = Script.opcodes;
@@ -13,13 +13,17 @@ const makeScript = (data) => {
 };
 
 export const reqProps = (form) => {
-  const id = getValFromForm(form, 'input', 'walletId');
-  const passphrase = getValFromForm(form, 'input', 'passphrase');
-  const value = getValFromForm(form, 'input', 'tx-amount');
-  const rate = getValFromForm(form, 'input', 'fee');
-  const destinationAddress = getValFromForm(form, 'input', 'destination');
-  const tx = getValFromForm(form, 'textarea', 'tx');
-  const data = getValFromForm(form, 'textarea', 'data');
+  const id = getValFromForm(form, 'walletId');
+  const passphrase = getValFromForm(form, 'passphrase');
+  const value = getValFromForm(form, 'tx-amount');
+  const rate = getValFromForm(form, 'fee');
+  const destinationAddress = getValFromForm(form, 'destination');
+  let tx = getValFromForm(form, 'tx', 'textarea');
+  if (tx) {
+    tx = JSON.parse(tx);
+  }
+  const data = getValFromForm(form, 'data', 'textarea');
+  const hash = getValFromForm(form, 'hash');
 
   const propsMap = {
     getFee: { type: 'GET', url: '/fee' },
@@ -71,7 +75,7 @@ export const reqProps = (form) => {
       url: `/wallet/${id}/sign`,
       data: {
         passphrase,
-        tx: tx ? MTX.fromOptions(tx) : '',
+        tx: tx ? MTX.MTX.fromOptions(tx) : '',
       },
     },
     addData: {
@@ -86,6 +90,7 @@ export const reqProps = (form) => {
         }],
       },
     },
+    getData: { type: 'GET', url: `/tx/${hash}`},
   };
 
   return propsMap;

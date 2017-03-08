@@ -11,6 +11,12 @@ const bcoinPort = 8080;
 const baseRequest = request.defaults({
   baseUrl: 'http://localhost:'.concat(bcoinPort),
 });
+nodeRouter.get('/tx/:hash', (req, res) => {
+  const blockcypherEndpoint = 'https://api.blockcypher.com/v1/btc/test3/txs/'
+    .concat(req.params.hash);
+  request(blockcypherEndpoint,
+    (err, response, body) => res.status(200).json(JSON.parse(body)));
+});
 
 nodeRouter.use((req, res) => {
   let authorization;
@@ -27,7 +33,6 @@ nodeRouter.use((req, res) => {
       sendImmediately: false,
     };
   }
-
   const options = {
     method: req.method,
     uri: req.path,

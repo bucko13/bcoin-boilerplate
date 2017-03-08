@@ -23,12 +23,12 @@ $(() => {
     const reqPropsMap = reqProps(form)[action];
     const type = reqPropsMap.type;
     const url = nodeEndpoint.concat(reqPropsMap.url);
-    const data = reqPropsMap.data ? reqPropsMap.data : '';
+    const data = reqPropsMap.data ? JSON.stringify(reqPropsMap.data) : '';
 
     $.ajax({
       type,
       url,
-      data: JSON.stringify(data),
+      data,
       processData: false,
       beforeSend: (xhr) => {
         xhr.setRequestHeader('Authorization', 'Basic ' + btoa('' + ':' + apiKey.val()));

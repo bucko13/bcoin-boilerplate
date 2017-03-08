@@ -4,7 +4,7 @@
   "description": "A boilerplate repo to get started with a bcoin based project",
   "scripts": {
     "test": "test",
-    "build": "browserify client/src/index.js -t babelify --outfile client/dist/build.js --debug ",
+    "build": "browserify client/src/index.js -t babelify --outfile client/dist/build.js",
     "watch": "watchify client/src/index.js -t babelify --outfile client/dist/build.js --debug --verbose"
   },
   "browserify": {
@@ -25,6 +25,7 @@
   "author": "Buck Perley",
   "license": "ISC",
   "dependencies": {
+    "assert": "^1.4.1",
     "basic-auth": "^1.1.0",
     "bcoin": "^1.0.0-beta.3",
     "body-parser": "^1.16.1",
