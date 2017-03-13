@@ -8,8 +8,12 @@
     "start-bcoin": "nodemon ./server/bcoin-server.js",
     "start-server": "nodemon ./server/server.js"
   },
+  "config": {
+    "config": "./bcoin-config.js"
+  },
   "browserify": {
     "transform": [
+      "partialify",
       [
         "babelify",
         {
@@ -48,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "nodemon": "^1.11.0",
+    "partialify": "^3.1.6",
     "watchify": "^3.9.0"
   }
 }
