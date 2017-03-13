@@ -11,10 +11,13 @@ This repo is to help you get up and running with a bcoin project on node
 
 ## Steps to Run Servers
 * navigate to project directory
-* run `node server/server.js`
-* in another session `node server/bcoin-server.js`
+* run `npm run start-server`
+* in another session `npm run start-bcoin`
 * send bcoin requests to http://localhost:5000/node/
-* open client on http://localhost:5000
+* client is served from http://localhost:5000
+
+default config file is setup in ./bcoin-config.js. This can be customized with your own options or you can specify your own config with the npm config param --config. e.g. `npm --config=./custom-config.js run start-bcoin`
+
 
 Nodejs server runs on port 5000 by default and acts as a router sending any requests to /node/ to the bcoin node (which runs on port 8080)
 

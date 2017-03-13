@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const nodeRouter = require('./nodeRouter.js');
-const multisigRouter = require('./multisigRouter.js');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -13,8 +12,6 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use('/node', nodeRouter);
-app.use('/multisig', multisigRouter);
-
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });

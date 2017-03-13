@@ -90,7 +90,7 @@ export const reqProps = (form) => {
         }],
       },
     },
-    getData: { type: 'GET', url: `/tx/${hash}`},
+    getData: { type: 'GET', url: `/tx/${hash}` },
   };
 
   return propsMap;
@@ -99,8 +99,8 @@ export const reqProps = (form) => {
 export const checkInputs = (action, form) => {
   const idField = form.find('input[name="walletId"]');
   const passphraseField = form.find('input[name="passphrase"]');
-  const id = getValFromForm(form, 'input', 'walletId');
-  const passphrase = getValFromForm(form, 'input', 'passphrase');
+  const id = getValFromForm(form, 'walletId');
+  const passphrase = getValFromForm(form, 'passphrase');
 
   // some simple form validation
   if (idField.length && passphraseField.length) {

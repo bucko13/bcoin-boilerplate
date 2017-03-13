@@ -1,27 +1,16 @@
 'use strict';
-const bcoin = require('bcoin');
-const API_KEY = require('../config.js').BCOIN_API_KEY;
-// const assert = require('assert');
-// const request = require('request');
 
+const config = require('../setup/setupUtils').getConfig();
+const bcoin = require('bcoin');
+
+// const request = require('request');
 // const co = bcoin.utils.co;
-const FullNode = bcoin.fullnode;
 // const MTX = bcoin.mtx;
+
+const FullNode = bcoin.fullnode;
 const port = +process.argv[2] || 8080;
 
-const options = bcoin.config({
-  network: 'testnet',
-  walletauth: true,
-  useWorkers: true,
-  coinCache: 30000000,
-  query: true,
-  passphrase: API_KEY,
-  apiKey: API_KEY,
-  pruned: true,
-  db: 'leveldb',
-  logLevel: 'debug',
-  logFile: true,
-});
+const options = bcoin.config(config);
 bcoin.set(options);
 
 const node = new FullNode(options);

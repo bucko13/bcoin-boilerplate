@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "A boilerplate repo to get started with a bcoin based project",
   "scripts": {
-    "test": "test",
     "build": "browserify client/src/index.js -t babelify --outfile client/dist/build.js",
-    "watch": "watchify client/src/index.js -t babelify --outfile client/dist/build.js --debug --verbose"
+    "watch": "watchify client/src/index.js -t babelify --outfile client/dist/build.js --debug --verbose",
+    "start-bcoin": "nodemon ./server/bcoin-server.js",
+    "start-server": "nodemon ./server/server.js"
   },
   "browserify": {
     "transform": [
@@ -46,6 +47,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
+    "nodemon": "^1.11.0",
     "watchify": "^3.9.0"
   }
 }
