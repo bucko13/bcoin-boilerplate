@@ -6,7 +6,8 @@
     "build": "browserify client/src/index.js -t babelify --outfile client/dist/build.js",
     "watch": "watchify client/src/index.js -t babelify --outfile client/dist/build.js --debug --verbose",
     "start-bcoin": "nodemon ./server/bcoin-server.js",
-    "start-server": "nodemon ./server/server.js"
+    "start-server": "nodemon ./server/server.js",
+    "start-spv": "npm --bcoin_node=spv --config=./spv-config.js run start-bcoin"
   },
   "config": {
     "config": "./bcoin-config.js"

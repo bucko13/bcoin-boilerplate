@@ -12,7 +12,7 @@ This repo is to help you get up and running with a bcoin project on node
 ## Steps to Run Servers
 * navigate to project directory
 * run `npm run start-server`
-* in another session `npm run start-bcoin`
+* in another session `npm run start-bcoin` to start a testnet full node. To start an SPV node on testnet run `npm run start-spv` instead
 * send bcoin requests to http://localhost:5000/node/
 * client is served from http://localhost:5000
 

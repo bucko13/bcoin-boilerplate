@@ -12,7 +12,7 @@ const options = bcoin.config(config);
 bcoin.set(options);
 
 let node;
-if (process.env.npm_config_node === 'spv') {
+if (process.env.npm_config_bcoin_node === 'spv') {
   node = new SPVNode(options);
 } else {
   node = new FullNode(options);
@@ -26,9 +26,11 @@ node.pool.on('open', () => {
   console.log('pool opened');
 });
 
-node.mempool.on('tx', (tx) => {
-  // console.log('******** Saw tx: ', tx);
-});
+if (node instanceof FullNode) {
+  node.mempool.on('tx', (tx) => {
+    // console.log('******** Saw tx: ', tx);
+  });
+}
 
 
 node.chain.on('block', () => {

@@ -1,5 +1,5 @@
 module.exports = {
-  prefix: '~/.bcoin/testnet',
+  prefix: '~/.bcoin/spv-testnet',
   network: 'testnet',
   walletauth: true,
   useWorkers: true,
