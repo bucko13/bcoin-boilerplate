@@ -1,5 +1,5 @@
 {
-    "extends": "airbnb",
+    "extends": ["eslint:recommended", "airbnb"],
     "plugins": [
         "react",
         "jsx-a11y",
@@ -9,6 +9,15 @@
       "import/no-dynamic-require": "off",
       "import/no-extraneous-dependencies": "off",
       "strict": "off",
-      "global-require": "off"
+      "global-require": "off",
+      "react/require-default-props": "off",
+      "react/jsx-filename-extension": 0,
+      "jsx-a11y/href-no-hash": "off"
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "commonjs": true,
+      "es6": true
     }
 }

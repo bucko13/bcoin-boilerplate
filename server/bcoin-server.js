@@ -32,7 +32,6 @@ if (node instanceof FullNode) {
   });
 }
 
-
 node.chain.on('block', () => {
   // console.log('new block found. Chain State tx: ', node.chain.tip);
 });

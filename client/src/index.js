@@ -10,7 +10,7 @@ window.jQuery = $;
 
 $(() => {
   const indexTemplate = require('../templates/template.html');
-  $('.app').html(indexTemplate);
+  $('#app').html(indexTemplate);
   const formActionButton = $('form button');
   $.get('/node/fee', (data) => {
     const value = data.rate;

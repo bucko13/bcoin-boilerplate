@@ -5,6 +5,8 @@
   "scripts": {
     "build": "browserify client/src/index.js -t babelify --outfile client/dist/build.js",
     "watch": "watchify client/src/index.js -t babelify --outfile client/dist/build.js --debug --verbose",
+    "build:react": "browserify client/react-src/index.js --extension=.jsx -t babelify --outfile client/dist/build.js",
+    "watch:react": "watchify client/react-src/index.js --extension=.jsx -t babelify --outfile client/dist/build.js --debug --verbose",
     "start-bcoin": "nodemon ./server/bcoin-server.js",
     "start-server": "nodemon ./server/server.js",
     "start-spv": "npm --bcoin_node=spv --config=./spv-config.js run start-bcoin"
@@ -12,20 +14,21 @@
   "config": {
     "config": "./bcoin-config.js"
   },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-3"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  },
   "browserify": {
+    "extension": [ "jsx" ],
     "transform": [
       "partialify",
-      [
-        "babelify",
-        {
-          "presets": [
-            "latest"
-          ],
-          "plugins": [
-            "transform-runtime"
-          ]
-        }
-      ]
+      "babelify"
     ]
   },
   "author": "Buck Perley",
@@ -39,11 +42,14 @@
     "express": "^4.14.1",
     "jquery": "^3.1.1",
     "level-js": "^2.2.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "request": "^2.79.0"
   },
   "devDependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "eslint": "^3.15.0",
@@ -51,7 +57,7 @@
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-react": "^6.10.0",
     "nodemon": "^1.11.0",
     "partialify": "^3.1.6",
     "watchify": "^3.9.0"
