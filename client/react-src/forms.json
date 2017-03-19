@@ -1,0 +1,19 @@
+[
+  {
+    "title": "Create Wallet",
+    "actionName": "createWallet",
+    "formClass": "create-wallet",
+    "formInputs": [
+      {
+        "label": "Wallet ID",
+        "name": "walletId",
+        "type": "input",
+      },
+      {
+        "label": "Wallet Passphrase",
+        "name": "passphrase",
+        "type": "password",
+      },
+    ],
+  },
+];

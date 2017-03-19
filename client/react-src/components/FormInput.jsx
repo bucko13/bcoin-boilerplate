@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const FormItem = ({
+const FormInput = ({
   label,
   name,
   type,
@@ -11,10 +11,10 @@ const FormItem = ({
   </div>
 );
 
-FormItem.propTypes = {
+FormInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 
-export default FormItem;
+export default FormInput;

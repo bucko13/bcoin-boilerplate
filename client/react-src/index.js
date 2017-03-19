@@ -3,16 +3,23 @@ import { render } from 'react-dom';
 
 import App from './containers/App';
 import NavBar from './components/NavBar';
-import FormItem from './components/FormItem';
+import FormContainer from './containers/FormContainer';
+import forms from './forms.json';
+
+const makeFormItems = formProps => (
+  <FormContainer
+    title={formProps.title}
+    actionName={formProps.actionName}
+    formInputs={formProps.formInputs}
+    formClass={formProps.formClass}
+    key={formProps.actionName}
+  />
+);
 
 render(
   <App>
     <NavBar appName="Bcoin BoilerPlate" />
-    <FormItem
-      label="Wallet Id"
-      name="walletId"
-      type="input"
-    />
+    { forms.map(makeFormItems) }
   </App>,
   document.getElementById('app'),
 );
