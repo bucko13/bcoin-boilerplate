@@ -7,7 +7,7 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "input",
+        "type": "text",
       },
     ]
   },
@@ -19,7 +19,7 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "input",
+        "type": "text",
       },
       {
         "label": "Wallet Passphrase",
@@ -36,7 +36,7 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "input",
+        "type": "text",
       },
     ],
   },
@@ -47,7 +47,7 @@
       {
         "label": "Wallet ID to Send Form",
         "name": "walletId",
-        "type": "input",
+        "type": "text",
       },
       {
         "label": "Wallet Passphrase",
@@ -57,7 +57,7 @@
       {
         "label": "Destination Address",
         "name": "destination",
-        "type": "input",
+        "type": "text",
       },
       {
         "label": "TX Fee Rate (per KB)",
@@ -80,7 +80,7 @@
       {
         "label": "Wallet ID to Send Form",
         "name": "walletId",
-        "type": "input",
+        "type": "text",
       },
       {
         "label": "Wallet Passphrase",
@@ -98,6 +98,17 @@
         "label": "Data",
         "name": "data",
         "type": "textarea",
+      },
+    ],
+  },
+  {
+    "title": "Get Data from the Blockchain (OP_RETURN)",
+    "actionName": "getData",
+    "formInputs": [
+      {
+        "label": "Transaction Hash to Retrieve From:",
+        "name": "hash",
+        "type": "text",
       },
     ],
   },

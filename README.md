@@ -6,8 +6,15 @@ This repo is to help you get up and running with a bcoin project on node
 
 ## Setup
 * Navigate to project directory
-* run `npm run watch` to build js and output to dist/build.js. Will watch for updates to js in src directory
+
+### Default Frontend (w/ jQuery, no other framework)
+This builds from the `client/react-src` directory, with `client/react-src/index.js` as its entry point
+* run `npm run watch` to build js and output to dist/build.js. Will watch for updates to js in react-src directory
 * run `npm run build` for prod build (no verbose or source maps or watch)
+
+### React Frontend
+* run `npm run watch:react` to build js and output to dist/build.js. Will watch for updates to js in src directory
+* run `npm run build:react` for prod build (no verbose or source maps or watch)
 
 ## Steps to Run Servers
 * navigate to project directory

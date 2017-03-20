@@ -111,7 +111,7 @@ export const checkInputs = (action, form) => {
       alert('Provide an id and a passphrase'); // eslint-disable-line no-alert, no-undef
       return false;
     }
-  } else if (!!idField.length && !id.length) {
+  } else if (!!idField && !id.length) {
     alert('Please provide a wallet id'); // eslint-disable-line no-alert, no-undef
     return false;
   }
