@@ -7,19 +7,22 @@ This repo is to help you get up and running with a bcoin project on node
 ## Setup
 * Navigate to project directory
 
-### Default Frontend (w/ jQuery, no other framework)
-This builds from the `client/react-src` directory, with `client/react-src/index.js` as its entry point
+#### Default Frontend (w/ jQuery, no other framework)
 * run `npm run watch` to build js and output to dist/build.js. Will watch for updates to js in react-src directory
 * run `npm run build` for prod build (no verbose or source maps or watch)
 
-### React Frontend
+#### React Frontend
+*(This builds from the `client/react-src` directory, with `client/react-src/index.js` as its entry point)*
 * run `npm run watch:react` to build js and output to dist/build.js. Will watch for updates to js in src directory
 * run `npm run build:react` for prod build (no verbose or source maps or watch)
+
+#### Styling
+stylings by default are just in `client/dist/build.css` which is requested in the empty index.html file. You can add your own build process for SASS, LESS, or modularized css, but there is none by default
 
 ## Steps to Run Servers
 * navigate to project directory
 * run `npm run start-server`
-* in another session `npm run start-bcoin` to start a testnet full node. To start an SPV node on testnet run `npm run start-spv` instead
+* in another session run either `npm run start-bcoin` for a testnet full node or `npm run start-spv` for SPV node
 * send bcoin requests to http://localhost:5000/node/
 * client is served from http://localhost:5000
 

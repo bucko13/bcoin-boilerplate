@@ -18,7 +18,7 @@ const makeFormItems = formProps => (
 
 render(
   <App>
-    <NavBar appName="Bcoin BoilerPlate" />
+    <NavBar appName="Bcoin Boilerplate" />
     { forms.map(makeFormItems) }
   </App>,
   document.getElementById('app'),
