@@ -20,8 +20,11 @@ This repo is to help you get up and running with a bcoin project on node
 * run `npm install`
 
 #### Default Front End (w/ jQuery)
+*(This builds from the `client/src` directory, with `client/src/index.js` as its entry point)*
 * run `npm run watch` to build js and output to `dist/build.js`. Will watch for updates to js in react-src directory
 * run `npm run build` for prod build (no verbose or source maps or watch)
+
+**-- OR --**
 
 #### React Front End
 *(This builds from the `client/react-src` directory, with `client/react-src/index.js` as its entry point)*
@@ -29,7 +32,7 @@ This repo is to help you get up and running with a bcoin project on node
 * run `npm run build:react` for prod build (no verbose or source maps or watch)
 
 #### Styling
-stylings by default are just in `client/dist/build.css` which is requested in the empty index.html file. You can add your own build process for SASS, LESS, or modularized css, but there is none by default
+By default, stylings are just in `client/dist/build.css` which is requested in the empty index.html file. You can add your own build process for SASS, LESS, modularized css, uglification, etc. but there are none by default
 
 #### Steps to Run Servers
 * navigate to project directory
