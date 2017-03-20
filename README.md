@@ -3,15 +3,26 @@
 This repo is to help you get up and running with a bcoin project on node
 
 ## Includes
+* Option for React front end build
+* Option for jQuery front end build
+* Front end forms have options for most wallet database functionalities including:
+  * creating new wallets
+  * generating addresses
+  * getting wallet information
+  * adding data to blockchain via OP_RETURN
+* Nodejs router to send client side requests to a bcoin node endpoint
+* Bcoin Node with two configs available: one for testnet full node and one for testnet spv node
+
 
 ## Setup
+* Clone repository to local
 * Navigate to project directory
 
-#### Default Frontend (w/ jQuery, no other framework)
+#### Default Front End (w/ jQuery)
 * run `npm run watch` to build js and output to dist/build.js. Will watch for updates to js in react-src directory
 * run `npm run build` for prod build (no verbose or source maps or watch)
 
-#### React Frontend
+#### React Front End
 *(This builds from the `client/react-src` directory, with `client/react-src/index.js` as its entry point)*
 * run `npm run watch:react` to build js and output to dist/build.js. Will watch for updates to js in src directory
 * run `npm run build:react` for prod build (no verbose or source maps or watch)
