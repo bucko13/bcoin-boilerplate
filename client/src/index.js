@@ -9,7 +9,7 @@ window.$ = $;
 window.jQuery = $;
 
 $(() => {
-  const indexTemplate = require('../templates/template.html');
+  const indexTemplate = require('./template.html');
   $('#app').html(indexTemplate);
   const formActionButton = $('form button');
   $.get('/node/fee', (data) => {

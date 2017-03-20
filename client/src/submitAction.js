@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { reqProps, checkInputs } from './utils';
+import { reqProps, checkInputs } from '../utils/utils';
 
 export default function submitClick(event) {
   event.preventDefault();
@@ -10,7 +10,7 @@ export default function submitClick(event) {
   const nodeEndpoint = '/node';
 
   const action = $(this).attr('data-action');
-  const form = $(this).parent();
+  const form = $(this).parent().get(0);
 
   if (!checkInputs(action, form)) return;
 

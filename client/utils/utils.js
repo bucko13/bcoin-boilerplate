@@ -1,6 +1,9 @@
 import { mtx as MTX, script as Script } from 'bcoin';
 
-const getValFromForm = (form, name, type = 'input') => form.find(`${type}[name="${name}"]`).val();
+const getValFromForm = (form, name, type = 'input') => {
+  const el = form.querySelector(`${type}[name="${name}"]`);
+  return el ? el.value : undefined;
+};
 
 const makeScript = (data) => {
   const opcodes = Script.opcodes;
@@ -97,18 +100,18 @@ export const reqProps = (form) => {
 };
 
 export const checkInputs = (action, form) => {
-  const idField = form.find('input[name="walletId"]');
-  const passphraseField = form.find('input[name="passphrase"]');
+  const idField = form.querySelector('input[name="walletId"]');
+  const passphraseField = form.querySelector('input[name="passphrase"]');
   const id = getValFromForm(form, 'walletId');
   const passphrase = getValFromForm(form, 'passphrase');
 
   // some simple form validation
-  if (idField.length && passphraseField.length) {
+  if (!!idField && !!passphraseField) {
     if (!id.length || !passphrase.length) {
       alert('Provide an id and a passphrase'); // eslint-disable-line no-alert, no-undef
       return false;
     }
-  } else if (idField.length && !id.length) {
+  } else if (!!idField.length && !id.length) {
     alert('Please provide a wallet id'); // eslint-disable-line no-alert, no-undef
     return false;
   }

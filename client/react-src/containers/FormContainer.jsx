@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import FormInput from '../components/FormInput';
+import submitAction from '../../src/submitAction';
 
 const FormContainer = ({
   title,
@@ -23,7 +24,13 @@ const FormContainer = ({
             />
           ))
         }
-        <button className="btn btn-success pull-right" data-action={actionName}>Submit</button>
+        <button
+          className="btn btn-success pull-right"
+          data-action={actionName}
+          onClick={event => submitAction(event)}
+        >
+          Submit
+        </button>
       </form>
     </div>
   </div>
