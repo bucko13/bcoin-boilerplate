@@ -12,8 +12,6 @@ const SPVNode = bcoin.spvnode;
 
 const port = process.argv[2] || 8080;
 
-// const options = bcoin.config(config);
-
 let node;
 if (process.env.npm_config_bcoin_node === 'spv') {
   node = new SPVNode(config);
@@ -21,6 +19,7 @@ if (process.env.npm_config_bcoin_node === 'spv') {
   node = new FullNode(config);
 }
 
+const walletdb = node.use(bcoin.walletplugin);
 node.on('error', () => {
   ; // eslint-disable-line no-extra-semi
 });
@@ -49,7 +48,7 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
   const destination = req.body.destination;
   const sendAmount = Number(req.body.amount);
   const wallets = req.body.wallets;
-  const multisig = yield node.walletdb.get(req.params.id);
+  const multisig = yield walletdb.get(req.params.id);
   const flags = Script.flags.STANDARD_VERIFY_FLAGS;
 
   // create the mutable tx and add payee output to it
@@ -65,7 +64,7 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
   // cycle through each of the additional wallets sent in the request for signing
   if (wallets && wallets.length) {
     wallets.forEach(co(function* signTx(wallet) {
-      const signer = yield node.walletdb.get(wallet.id);
+      const signer = yield walletdb.get(wallet.id);
       const pass = wallet.passphrase;
 
       yield signer.sign(mtx, pass);
