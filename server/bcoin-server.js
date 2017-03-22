@@ -12,14 +12,14 @@ const SPVNode = bcoin.spvnode;
 
 const port = process.argv[2] || 8080;
 
-const options = bcoin.config(config);
-bcoin.set(options);
+// const options = bcoin.config(config);
+// bcoin.set(options);
 
 let node;
 if (process.env.npm_config_bcoin_node === 'spv') {
-  node = new SPVNode(options);
+  node = new SPVNode(config);
 } else {
-  node = new FullNode(options);
+  node = new FullNode(config);
 }
 
 node.on('error', () => {

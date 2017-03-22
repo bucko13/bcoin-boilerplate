@@ -1,5 +1,5 @@
 # BCOIN BOILERPLATE
-**NOTE: This is not compatible with the latest beta release of bcoin as there were some major changes to the way that wallets are handled with the node object. The bcoin version is stabilized on beta3. Note below that a change needs to be made to the bcoin code to fix an error there**
+**NOTE: for configs to work you will need to make a change in bcoin (until it is fixed in the official package). See below for more details**
 ## Overview
 This repo is to help you get up and running with a bcoin project on node
 
@@ -19,7 +19,7 @@ This repo is to help you get up and running with a bcoin project on node
 * Clone repository to local
 * Navigate to project directory
 * run `npm install`
-* **IMPORTANT: in ``/node_modules/bcoin/lib/node/config.js` comment out or delete the assertion on line 58**
+* **IMPORTANT: in ``/node_modules/bcoin/lib/node/config.js` comment out or delete conditional on lines 522 and 523**
 
 #### Default Front End (w/ jQuery)
 *(This builds from the `client/src` directory, with `client/src/index.js` as its entry point)*
