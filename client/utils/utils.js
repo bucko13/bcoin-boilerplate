@@ -73,8 +73,8 @@ export const reqProps = (form) => {
         id,
         passphrase,
         type: 'multisig',
-        m: getValFromForm(form, 'input', 'm'),
-        n: getValFromForm(form, 'input', 'n'),
+        m: getValFromForm(form, 'm'),
+        n: getValFromForm(form, 'n'),
       },
     },
     addKey: {
