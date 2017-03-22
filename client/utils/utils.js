@@ -81,7 +81,7 @@ export const reqProps = (form) => {
       type: 'PUT',
       url: `/wallet/${id}/shared-key`,
       data: {
-        accountKey: getValFromForm(form, 'input', 'accountKey'),
+        accountKey: getValFromForm(form, 'accountKey'),
       },
     },
     createTx: {

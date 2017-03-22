@@ -9,6 +9,6 @@ module.exports = {
   apiKey: 'testme',
   pruned: true,
   db: 'leveldb',
-  // logLevel: 'info',
+  logLevel: 'info',
   logFile: true,
 };
