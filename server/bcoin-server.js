@@ -71,14 +71,12 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
     }));
   }
 
-  // check that our mtx is valid
-  // assert(mtx.verify(), 'MTX did not verify after signatures');
-
   // make transaction immutable and send
+  const view = mtx.view;
   const tx = mtx.toTX();
-  assert(tx.verify(mtx.view, flags));
-  const result = yield node.sendTX(tx);
+  assert(tx.verify(view, flags));
 
+  const result = yield node.sendTX(tx);
   res.send(200, { result });
 }));
 
