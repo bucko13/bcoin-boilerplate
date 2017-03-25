@@ -5,11 +5,15 @@
   <link rel="stylesheet" href="/build.css">
 </head>
 <body>
-<h1>Add Data to Torrent</h2>
+<h1>Add Data to BlockChain!</h2>
 	<form action="/addTorrent" method="POST">
-	<input type="text" name="torrentName" />
-	<input type="text" name="hash" />
+	<input type="text" name="torrentName" placeholder="Torrent name..."/>
+	<input type="text" name="hash" placeholder="SHA-1 Hash..."/>
 	<button type="submit">Submit</button>
 	</form>
+	<div><h1>Get torrents...</h1>
+	<button>Fetch!</button>
+	</div>
+
 </body>
 </html>
