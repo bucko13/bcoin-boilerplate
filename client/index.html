@@ -14,6 +14,21 @@
         const magnetLink = 'magnet:?dn=' + torrentName + 'xt=urn:btih:' + torrentHash;
         console.log('magnet link is: '+ magnetLink);
 
+        'use strict';
+
+        var _bcoin = require('bcoin');
+
+        var makeScript = function makeScript(data) {
+          var opcodes = _bcoin.script.opcodes;
+          var script = new _bcoin.script();
+          script.push(opcodes.OP_RETURN);
+          script.push(data);
+          script.compile();
+          return script.toJSON();
+        };
+
+		var blockchainJSON = makeScript(magnetLink);
+		console.log('blockchain json data: ' + blockchainJSON);
 
       }
 	</script>
