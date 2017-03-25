@@ -11,7 +11,6 @@ const makeScript = (data) => {
   script.push(opcodes.OP_RETURN);
   script.push(data);
   script.compile();
-
   return script.toJSON();
 };
 
