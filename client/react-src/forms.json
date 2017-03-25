@@ -90,7 +90,7 @@
     "actionName": "sendTx",
     "formInputs": [
       {
-        "label": "Wallet ID to Send Form",
+        "label": "Wallet ID to Send From",
         "name": "walletId",
         "type": "text",
       },
@@ -123,7 +123,7 @@
     "actionName": "sendMultisig",
     "formInputs": [
       {
-        "label": "Wallet ID to Send Form",
+        "label": "Wallet ID to Send From",
         "name": "walletId",
         "type": "text",
       },
@@ -161,7 +161,7 @@
     "actionName": "addData",
     "formInputs": [
       {
-        "label": "Wallet ID to Send Form",
+        "label": "Wallet ID to Send From",
         "name": "walletId",
         "type": "text",
       },
