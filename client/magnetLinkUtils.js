@@ -3,6 +3,7 @@
  */
 
 const myLink = document.getElementById('submitMagnetLinkButton');
+debugger;
 myLink.onclick = function () {
   alert('clicked magnet button');
 };
