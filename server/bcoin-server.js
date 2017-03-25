@@ -5,6 +5,7 @@ const bcoin = require('bcoin');
 const assert = require('assert');
 
 const co = bcoin.utils.co;
+const util = bcoin.util;
 const MTX = bcoin.mtx;
 const Script = bcoin.script;
 const FullNode = bcoin.fullnode;
@@ -58,26 +59,28 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
 
   // fund and sign the mtx with the multisig wallet
   yield multisig.fund(mtx, { rate: 10000, round: true });
+  util.log(mtx);
   yield multisig.sign(mtx, passphrase);
   assert(!mtx.verify(flags));
 
   // cycle through each of the additional wallets sent in the request for signing
   if (wallets && wallets.length) {
-    wallets.forEach(co(function* signTx(wallet) {
-      const signer = yield walletdb.get(wallet.id);
-      const pass = wallet.passphrase;
+    for (let i = 0; i < wallets.length; i++) {
+      const signer = yield walletdb.get(wallets[i].id);
+      const pass = wallets[i].passphrase;
 
-      yield signer.sign(mtx, pass);
-    }));
+      console.log(yield signer.sign(mtx, pass));
+    }
   }
 
   // make transaction immutable and send
   const view = mtx.view;
   const tx = mtx.toTX();
   assert(tx.verify(view, flags));
+  util.log(tx);
 
-  const result = yield node.sendTX(tx);
-  res.send(200, { result });
+  yield node.sendTX(tx);
+  res.send(200, { tx });
 }));
 
 node.http.listen(port, '127.0.0.1');
