@@ -25,7 +25,9 @@
     ]
   },
   "browserify": {
-    "extension": [ "jsx" ],
+    "extension": [
+      "jsx"
+    ],
     "transform": [
       "partialify",
       "babelify"
@@ -50,6 +52,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-3": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "eslint": "^3.15.0",
