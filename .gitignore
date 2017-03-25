@@ -4,3 +4,4 @@ node_modules/*
 /config.js
 build.js
 **/npm-debug.log
+.idea
