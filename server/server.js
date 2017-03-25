@@ -17,5 +17,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(app.get('port'), '127.0.0.1', () => {
-  console.log('Node app is running on port', app.get('port')); // eslint-disable-line no-console
+  console.log('Node app is running on port!', app.get('port')); // eslint-disable-line no-console
 });
