@@ -5,11 +5,8 @@
   <link rel="stylesheet" href="/build.css">
 </head>
 <body>
-<h1>Add Data to Torrent</h2>
-	<form action="/addTorrent" method="POST">
-	<input type="text" name="torrentName" />
-	<input type="text" name="hash" />
-	<button type="submit">Submit</button>
-	</form>
+<div id="app"></div>
+
+<script src="/build.js"></script>
 </body>
 </html>
