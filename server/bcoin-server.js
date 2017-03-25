@@ -5,9 +5,11 @@ const bcoin = require('bcoin');
 const assert = require('assert');
 
 const co = bcoin.utils.co;
-const util = bcoin.util;
+
+// const util = bcoin.util;
 const MTX = bcoin.mtx;
 const Script = bcoin.script;
+const Amount = bcoin.btc.Amount;
 const FullNode = bcoin.fullnode;
 const SPVNode = bcoin.spvnode;
 
@@ -26,10 +28,11 @@ node.on('error', () => {
 });
 
 node.pool.on('open', () => {
-  console.log('pool opened');
+  console.log('pool opened'); // eslint-disable-line no-console
 });
 
 if (node instanceof FullNode) {
+  // eslint-disable-next-line no-unused-vars
   node.mempool.on('tx', (tx) => {
     // console.log('******** Saw tx: ', tx);
   });
@@ -44,10 +47,11 @@ node.open()
 .then(() => node.startSync());
 
 node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
+  console.log('Amount', Amount);
   const passphrase = req.body.passphrase;
-  const rate = req.body.rate;
+  const rate = Amount.value(req.body.rate);
   const destination = req.body.destination;
-  const sendAmount = Number(req.body.amount);
+  const sendAmount = Amount.value(req.body.amount);
   const wallets = req.body.wallets;
   const multisig = yield walletdb.get(req.params.id);
   const flags = Script.flags.STANDARD_VERIFY_FLAGS;
@@ -58,8 +62,7 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
   assert(!mtx.verify(flags));
 
   // fund and sign the mtx with the multisig wallet
-  yield multisig.fund(mtx, { rate: 10000, round: true });
-  util.log(mtx);
+  yield multisig.fund(mtx, { rate, round: true });
   yield multisig.sign(mtx, passphrase);
   assert(!mtx.verify(flags));
 
@@ -68,8 +71,7 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
     for (let i = 0; i < wallets.length; i++) {
       const signer = yield walletdb.get(wallets[i].id);
       const pass = wallets[i].passphrase;
-
-      console.log(yield signer.sign(mtx, pass));
+      yield signer.sign(mtx, pass);
     }
   }
 
@@ -77,7 +79,6 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
   const view = mtx.view;
   const tx = mtx.toTX();
   assert(tx.verify(view, flags));
-  util.log(tx);
 
   yield node.sendTX(tx);
   res.send(200, { tx });
