@@ -26,6 +26,10 @@ export const reqProps = (form) => {
   }
   const data = getValFromForm(form, 'data', 'textarea');
   const hash = getValFromForm(form, 'hash');
+  const torrentName = getValFromForm(form, 'torrentNameId');
+  const torrentHash = getValFromForm(form, 'torrentHashId');
+  const magnetLink = `magnet:?dn=${torrentName}&xt=urn:btih:${torrentHash}`;
+  console.log( `magnetLink is: ${magnetLink}`);
 
   const propsMap = {
     getFee: { type: 'GET', url: '/fee' },
@@ -80,15 +84,14 @@ export const reqProps = (form) => {
         tx: tx ? MTX.MTX.fromOptions(tx) : '',
       },
     },
-    addData: {
+    addMagnetLink: {
       type: 'POST',
-      url: `/wallet/${id}/send`,
+      url: '/wallet/primary/send',
       data: {
-        rate,
-        passphrase,
+        magnetLink,
         outputs: [{
           value: 0,
-          script: data ? makeScript(data) : '',
+          script: magnetLink ? makeScript(magnetLink) : '',
         }],
       },
     },

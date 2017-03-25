@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/build.css">
+	<script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Add Data to BlockChain!</h1>
+	<script>
+      function createMagnetLink() {
+		const torrentName = $('#torrentName').val();
+        const torrentHash = $('#torrentHash').val();
+        const magnetLink = 'magnet:?dn=' + torrentName + 'xt=urn:btih:' + torrentHash;
+        console.log('magnet link is: '+ magnetLink);
+
+        'use strict';
+
+        var _bcoin = require('bcoin');
+
+        var makeScript = function makeScript(data) {
+          var opcodes = _bcoin.script.opcodes;
+          var script = new _bcoin.script();
+          script.push(opcodes.OP_RETURN);
+          script.push(data);
+          script.compile();
+          return script.toJSON();
+        };
+
+		var blockchainJSON = makeScript(magnetLink);
+		console.log('blockchain json data: ' + blockchainJSON);
+
+      }
+	</script>
+	<input id='torrentName' type="text" name="torrentName" placeholder="Torrent name..."/>
+	<input id='torrentHash' type="text" name="torrentHash" placeholder="SHA-1 Hash..."/>
+	<button onclick="createMagnetLink()">Submit</button>
+	<div><h1>Get torrents...</h1>
+	<button>Fetch!</button>
+	</div>
+	<!--<script type="text/javascript" src="magnetLinkUtils.js"></script>-->
+
+</body>
+
+</html>
