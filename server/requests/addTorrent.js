@@ -3,7 +3,10 @@
  */
 
 const addTorrentHandler = (request, response) => {
-  response.send('testing');
+  const torrentName = request.query.torrentName;
+  const torrentHash = request.query.torrentHash;
+
+  response.send('torrent name -> ' + torrentName + 'and torrent hash is -> ' + torrentHash);
 };
 
 module.exports = addTorrentHandler;
