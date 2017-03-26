@@ -41,11 +41,56 @@
     ],
   },
   {
+    "title": "Create Multisig Wallet",
+    "actionName": "createMultisig",
+    "formClass": "create-multisig",
+    "formInputs": [
+      {
+        "label": "Wallet ID",
+        "name": "walletId",
+        "type": "text",
+      },
+      {
+        "label": "Wallet Passphrase",
+        "name": "passphrase",
+        "type": "password",
+      },
+      {
+        "label": "Number of potential signers (N)",
+        "name": "n",
+        "type": "number",
+        "value":"3"
+      },
+      {
+        "label": "Minimum number of signers (M)",
+        "name": "m",
+        "type": "number",
+        "value":"2"
+      },
+    ],
+  },
+  {
+    "title": "Add xpubkey/accountKey to Multisig",
+    "actionName": "addKey",
+    "formInputs": [
+      {
+        "label": "Target Wallet",
+        "name": "walletId",
+        "type": "text",
+      },
+      {
+        "label": "Public Key:",
+        "name": "accountKey",
+        "type": "text",
+      },
+    ],
+  },
+  {
     "title": "Send Transaction",
     "actionName": "sendTx",
     "formInputs": [
       {
-        "label": "Wallet ID to Send Form",
+        "label": "Wallet ID to Send From",
         "name": "walletId",
         "type": "text",
       },
@@ -74,11 +119,49 @@
     ],
   },
   {
+    "title": "Create and Send Multisig Transaction",
+    "actionName": "sendMultisig",
+    "formInputs": [
+      {
+        "label": "Wallet ID to Send From",
+        "name": "walletId",
+        "type": "text",
+      },
+      {
+        "label": "Wallet Passphrase",
+        "name": "passphrase",
+        "type": "password",
+      },
+      {
+        "label": "Destination Address",
+        "name": "destination",
+        "type": "text",
+      },
+      {
+        "label": "TX Fee Rate (per KB)",
+        "name": "fee",
+        "type": "number",
+        "min": "0",
+        "step": ".0001",
+      },
+      {
+        "label": "Amount to send",
+        "name": "tx-amount",
+        "type": "number",
+      },
+      {
+        "label": "Other signing wallets (each id on its own line, password on following line, blank line if no password)",
+        "name": "signers",
+        "type": "textarea",
+      }
+    ]
+  },
+  {
     "title": "Add Data to the Blockchain (OP_RETURN)",
     "actionName": "addData",
     "formInputs": [
       {
-        "label": "Wallet ID to Send Form",
+        "label": "Wallet ID to Send From",
         "name": "walletId",
         "type": "text",
       },

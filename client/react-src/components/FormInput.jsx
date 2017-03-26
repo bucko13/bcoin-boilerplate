@@ -6,6 +6,7 @@ const FormInput = ({
   type,
   min,
   step,
+  value,
 }) => {
   let input;
   if (type === 'textarea') {
@@ -18,6 +19,7 @@ const FormInput = ({
       className={`form-control ${name}`}
       min={min}
       step={step}
+      defaultValue={value}
     />);
   }
 
@@ -35,6 +37,7 @@ FormInput.propTypes = {
   type: PropTypes.string.isRequired,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default FormInput;

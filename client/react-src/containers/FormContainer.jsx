@@ -45,7 +45,7 @@ class FormContainer extends Component {
       formInputs,
     } = this.props;
 
-    const composeInput = ({ label, name, type, min, step }) => (
+    const composeInput = ({ label, name, type, min, step, value }) => (
       <FormInput
         label={label}
         name={name}
@@ -53,6 +53,7 @@ class FormContainer extends Component {
         min={min}
         step={step}
         key={name}
+        value={value}
       />
     );
 

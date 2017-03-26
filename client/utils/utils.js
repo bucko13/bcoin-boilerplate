@@ -15,6 +15,21 @@ const makeScript = (data) => {
   return script.toJSON();
 };
 
+export const makeWalletList = (textarea) => {
+  const entries = textarea.split(/\n/);
+  const wallets = [];
+
+  entries.forEach((entry, i) => {
+    if (i % 2 === 0) {
+      // then it is wallet id
+      wallets.push({ id: entry });
+    } else {
+      wallets[wallets.length - 1].passphrase = entry;
+    }
+  });
+  return wallets;
+};
+
 export const reqProps = (form) => {
   const id = getValFromForm(form, 'walletId');
   const passphrase = getValFromForm(form, 'passphrase');
@@ -27,6 +42,11 @@ export const reqProps = (form) => {
   }
   const data = getValFromForm(form, 'data', 'textarea');
   const hash = getValFromForm(form, 'hash');
+  const signers = getValFromForm(form, 'signers', 'textarea');
+  let wallets;
+  if (signers) {
+    wallets = makeWalletList(signers);
+  }
 
   const propsMap = {
     getFee: { type: 'GET', url: '/fee' },
@@ -53,15 +73,15 @@ export const reqProps = (form) => {
         id,
         passphrase,
         type: 'multisig',
-        m: getValFromForm(form, 'input', 'm'),
-        n: getValFromForm(form, 'input', 'n'),
+        m: getValFromForm(form, 'm'),
+        n: getValFromForm(form, 'n'),
       },
     },
     addKey: {
       type: 'PUT',
       url: `/wallet/${id}/shared-key`,
       data: {
-        accountKey: getValFromForm(form, 'input', 'accountKey'),
+        accountKey: getValFromForm(form, 'accountKey'),
       },
     },
     createTx: {
@@ -94,6 +114,17 @@ export const reqProps = (form) => {
       },
     },
     getData: { type: 'GET', url: `/tx/${hash}` },
+    sendMultisig: {
+      type: 'POST',
+      url: `/multisig/${id}`,
+      data: {
+        rate,
+        passphrase,
+        destination: destinationAddress,
+        amount: value,
+        wallets,
+      },
+    },
   };
 
   return propsMap;
