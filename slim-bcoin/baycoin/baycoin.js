@@ -55,7 +55,7 @@ const fetchLink = (data) => {
     const options = {
       method: props.type,
       uri: props.url,
-      body: JSON.stringify(props.data),
+      body: props.data,
       json: true
     };
 
@@ -98,7 +98,7 @@ const searchHash = (hash, name) => {
         // Remove the first 4 bytes as that is the OP_RETURN
         const json = JSON.parse(decompile(data.outputs[0].script.substring(4)));
         if (!name || json.name.toUpperCase().includes(name.toUpperCase())) {
-          console.log(`Hash: ${data.hash}`);
+          //console.log(`Hash: ${data.hash}`);
           // console.log(json);
           return json;
         }
@@ -109,7 +109,7 @@ const searchHash = (hash, name) => {
 };
 
 const searchLink = (name) => {
-  fetchLink({type: 'getTrans'})
+  return fetchLink({type: 'getTrans'})
     .then(data => {
        // Loops through all data
       return Promise.all(
