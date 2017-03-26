@@ -7,13 +7,14 @@
       <div class="panel-body">
 
           <div class="form-group">
-             <label for="name">Torrent Name</label>
-             <input type="text" name="torrentname" class="form-control" id="torrentname"/>
+             <label for="name">Magnet Links</label>
+             <textarea name="magnets" class="form-control" id="magnets"/>
+             <!-- <input type="text" name="torrentname" class="form-control" id="torrentname"/> -->
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="data">Data:</label>
             <input name="data" class="data-field form-control" id="data" />
-          </div>
+          </div> -->
           <button class="btn btn-primary" name="batch" id="batch" onclick="window.addToBatch()">Add To Batch</button>
             <button type="submit" class="btn btn-success pull-right" onclick="window.submitAction()">Submit</button>
       </div>
