@@ -56,6 +56,7 @@ const fetchLink = (data) => {
       method: props.type,
       uri: props.url,
       body: JSON.stringify(props.data),
+      json: true
     };
 
     baseRequest(options, (err, resp, body) => {
@@ -89,8 +90,8 @@ const writeLink = (link) => {
   })
 };
 
-const fetchTorrent = (hash, name) => {
-  fetchLink({type: 'getData', hash})
+const searchHash = (hash, name) => {
+  return fetchLink({type: 'getData', hash})
     .then(data => {
       if (!data.outputs) return;
       try {
@@ -98,7 +99,8 @@ const fetchTorrent = (hash, name) => {
         const json = JSON.parse(decompile(data.outputs[0].script.substring(4)));
         if (!name || json.name.toUpperCase().includes(name.toUpperCase())) {
           console.log(`Hash: ${data.hash}`);
-          console.log(json);
+          // console.log(json);
+          return json;
         }
       } catch (err) {
         // console.log(err);
@@ -110,10 +112,11 @@ const searchLink = (name) => {
   fetchLink({type: 'getTrans'})
     .then(data => {
        // Loops through all data
-      data.map(b => {
-        fetchTorrent(b.hash, name);
-      });
+      return Promise.all(
+        data.map(b => searchHash(b.hash, name))
+      )
+      .then(data => data.filter(b => b));
     });
 };
 
-export { writeLink, decompile, fetchTorrent, fetchLink, searchLink };
+export { writeLink, searchLink, searchHash };
