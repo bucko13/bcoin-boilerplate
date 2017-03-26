@@ -1,4 +1,6 @@
 import { mtx as MTX, script as Script } from 'bcoin';
+import { writeData, fetchData } from './paste';
+
 const request = require('request');
 
 // CONSTANTS
@@ -58,6 +60,8 @@ const fetchLink = (data) => {
       body: props.data,
       json: true
     };
+    // This is needed as creating a message doesn't allow JSON header to be set
+    if (props.type === 'POST') delete options.json;
 
     baseRequest(options, (err, resp, body) => {
       if (err) reject(err);
@@ -66,6 +70,7 @@ const fetchLink = (data) => {
   });
 };
 
+// Converts the hex string back to ASCII (Human Readable) text
 const decompile = (hexx) => {
   var hex = hexx.toString();//force conversion
   var str = '';
@@ -74,40 +79,50 @@ const decompile = (hexx) => {
   return str;
 };
 
-const writeLink = (link) => {
-  return fetchLink(
+// Writes magnet links to paste.sh
+// paste.sh link stored into blockchain
+// Format
+/* magnet:...&dn={name}\n
+ * magnet:...&dn={name}\n
+ * magnet:...&dn={name}\n
+ */
+const writeLink = (data) => {
+  return writeData(data)
+    .then(url => {
+      console.log(`Url: ${url}`);
+      return fetchLink(
       {
         type: 'addData', 
-        content: JSON.stringify({link})
+        content: url
       })
-  // Creating new data to blockchain
-  .then(data => {
-    //console.log(`Here's your data: ${data}`);
-    data = JSON.parse(data.toString());
-    //console.log(data['hash']);
-    return data.hash;
-    // return Promise.resolve(data.hash);
-  })
+    })
+    // Creating new data to blockchain
+    .then(data => {
+      const dataObj = JSON.parse(data);
+      console.log(`Here's your data: ${dataObj.hash}`);
+      return dataObj.hash;
+    })
 };
 
+// Search a transaction hash and extract the paste.sh URL
 const searchHash = (hash, name) => {
   return fetchLink({type: 'getData', hash})
     .then(data => {
       if (!data.outputs) return;
       try {
         // Remove the first 4 bytes as that is the OP_RETURN
-        const json = JSON.parse(decompile(data.outputs[0].script.substring(4)));
-        if (!name || json.name.toUpperCase().includes(name.toUpperCase())) {
-          //console.log(`Hash: ${data.hash}`);
-          // console.log(json);
-          return json;
+        const scriptContent = decompile(data.outputs[0].script.substring(4));
+        if (scriptContent.includes('paste.sh')) {
+          console.log(`Url: ${scriptContent}`);
+          return fetchData(scriptContent);
         }
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     });
 };
 
+// Search a wallet transaction history and sends it to searchHash to get the magnet links.
 const searchLink = (name) => {
   return fetchLink({type: 'getTrans'})
     .then(data => {
@@ -115,7 +130,18 @@ const searchLink = (name) => {
       return Promise.all(
         data.map(b => searchHash(b.hash, name))
       )
-      .then(data => data.filter(b => b));
+      // Ensure invalid transactions does not exit
+      .then(data => {
+        return data.filter(b => b);
+      })
+      // Flatten the array. [[1,2],[3,4]] => [1,2,3,4]
+      .then(data => [].concat.apply([], data))
+      // Filter the array based on name parameter
+      .then(data => data.filter(b => !name || b.toLowerCase().includes(name.toLowerCase().replace(' ', '+'))))
+      .then(magnetLinks => {
+        console.log(magnetLinks);
+        return magnetLinks;
+      });
     });
 };
 
