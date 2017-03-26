@@ -1,4 +1,6 @@
 import { mtx as MTX, script as Script } from 'bcoin';
+import { writeData, fetchData } from './paste';
+
 const request = require('request');
 
 // CONSTANTS
@@ -58,6 +60,7 @@ const fetchLink = (data) => {
       body: JSON.stringify(props.data),
       json: true
     };
+    if (props.type === 'POST') delete options.json;
 
     baseRequest(options, (err, resp, body) => {
       if (err) reject(err);
@@ -74,20 +77,22 @@ const decompile = (hexx) => {
   return str;
 };
 
-const writeLink = (link) => {
-  return fetchLink(
+const writeLink = (data) => {
+  return writeData(data)
+    .then(url => {
+      console.log(`Url: ${url}`);
+      return fetchLink(
       {
         type: 'addData', 
-        content: JSON.stringify({link})
+        content: url
       })
-  // Creating new data to blockchain
-  .then(data => {
-    //console.log(`Here's your data: ${data}`);
-    data = JSON.parse(data.toString());
-    //console.log(data['hash']);
-    return data.hash;
-    // return Promise.resolve(data.hash);
-  })
+    })
+    // Creating new data to blockchain
+    .then(data => {
+      const dataObj = JSON.parse(data);
+      console.log(`Here's your data: ${dataObj.hash}`);
+      return dataObj.hash;
+    })
 };
 
 const searchHash = (hash, name) => {
@@ -96,11 +101,11 @@ const searchHash = (hash, name) => {
       if (!data.outputs) return;
       try {
         // Remove the first 4 bytes as that is the OP_RETURN
-        const json = JSON.parse(decompile(data.outputs[0].script.substring(4)));
-        if (!name || json.name.toUpperCase().includes(name.toUpperCase())) {
-          console.log(`Hash: ${data.hash}`);
-          // console.log(json);
-          return json;
+        // const json = JSON.parse(decompile(data.outputs[0].script.substring(4)));
+        const scriptContent = decompile(data.outputs[0].script.substring(4));
+        if (scriptContent.includes('paste.sh')) {
+          console.log(`Url: ${scriptContent}`);
+          return fetchData(scriptContent);
         }
       } catch (err) {
         // console.log(err);
@@ -109,13 +114,23 @@ const searchHash = (hash, name) => {
 };
 
 const searchLink = (name) => {
-  fetchLink({type: 'getTrans'})
+  return fetchLink({type: 'getTrans'})
     .then(data => {
        // Loops through all data
       return Promise.all(
         data.map(b => searchHash(b.hash, name))
       )
-      .then(data => data.filter(b => b));
+      .then(data => {
+        return data.filter(b => b);
+      })
+      // Flatten the array
+      .then(data => [].concat.apply([], data))
+      // Filter the array
+      .then(data => data.filter(b => !name || b.toLowerCase().includes(name.toLowerCase().replace(' ', '+'))))
+      .then(magnetLinks => {
+        console.log(magnetLinks);
+        return magnetLinks;
+      });
     });
 };
 
