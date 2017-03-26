@@ -14,6 +14,11 @@ This repo is to help you get up and running with a bcoin project on node
 * Nodejs router to send client side requests to a bcoin node endpoint
 * Bcoin Node with two configs available: one for testnet full node and one for testnet spv node
 
+## Architecture
+1.  The client offers several forms to access useful features of the bcoin node REST API.
+2. These forms make AJAX requests to a NodeJS/Express server (default runs on port 5000). Non-bcoin requests can be handled as normal on this server (e.g. static assets)
+3. Any request from the client that starts with `/node` is routed to a bcoin server (default runs on port 18332)
+
 
 ## Setup
 * Clone repository to local
@@ -47,6 +52,11 @@ default config file is setup in `./bcoin-config.js`. This can be customized with
 
 
 Nodejs server runs on port 5000 by default and acts as a router sending any requests to /node/ to the bcoin node (which runs on port 8080)
+
+## Gotchas and Troubleshooting
+* when in doubt `rm -rf node_modules && npm i`. There are some tricky dependencies that sometimes get missed, so deleting your node modules will usually help fix this.
+* bcoin is still in active development so we've stabilized on the most recent version where this repo was known to work (currently 1.0.0-beta.11)
+* Check that the NodeJS server/router is using the correct port for bcoin requests
 
 ## Notes
 * uses eslint with airbnb configs. These are quite strict but make the code nice and consistent, enforcing ES6 notation where possible. This can be changed via the .eslintrc.json config file.

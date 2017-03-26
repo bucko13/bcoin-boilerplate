@@ -13,8 +13,6 @@ const Amount = bcoin.btc.Amount;
 const FullNode = bcoin.fullnode;
 const SPVNode = bcoin.spvnode;
 
-const port = process.argv[2] || 8080;
-
 let node;
 if (process.env.npm_config_bcoin_node === 'spv') {
   node = new SPVNode(config);
@@ -42,12 +40,12 @@ node.chain.on('block', () => {
   // console.log('new block found. Chain State tx: ', node.chain.tip);
 });
 
-node.open()
+node.ensure()
+.then(() => node.open())
 .then(() => node.connect())
 .then(() => node.startSync());
 
 node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
-  console.log('Amount', Amount);
   const passphrase = req.body.passphrase;
   const rate = Amount.value(req.body.rate);
   const destination = req.body.destination;
@@ -83,5 +81,3 @@ node.http.post('/multisig/:id', co(function* postMultisig(req, res) {
   yield node.sendTX(tx);
   res.send(200, { tx });
 }));
-
-node.http.listen(port, '127.0.0.1');
