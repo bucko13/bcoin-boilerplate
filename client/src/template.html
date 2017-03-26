@@ -19,229 +19,26 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Create Wallet</h3>
-      </div>
-      <div class="panel-body">
-        <form class="create wallet">
-          <div class="form-group">
-            <label for="walletId">Wallet ID</label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="passphrase">Wallet Passphrase</label>
-            <input type="password" name="passphrase" class="wallet-passphrase form-control"/>
-          </div>
-          <button class="btn btn-success pull-right" data-action="createWallet">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Get Wallet Information</h3>
-      </div>
-      <div class="panel-body">
-        <form class="get wallet">
-          <div class="form-group">
-            <label for="walletId">Wallet ID</label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <button class="btn btn-success pull-right" data-action="getWallet">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Get New Address</h3>
-      </div>
-      <div class="panel-body">
-        <form class="get address">
-          <div class="form-group">
-            <label for="walletId">Wallet ID: </label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <button class="btn btn-success pull-right" data-action="getAddress">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <h2></h2>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Send Transaction</h3>
-      </div>
-      <div class="panel-body">
-        <form class="send transaction">
-          <div class="form-group">
-            <label for="walletId">Wallet ID to Send From: </label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="walletId">Wallet Passphrase</label>
-            <input type="password" name="passphrase" class="wallet-passphrase form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="destination">Destination Address:</label>
-            <input type="text" name="destination" class="tx-address form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="fee">TX Fee Rate (per KB):</label>
-            <input type="number" name="fee" class="tx-fee form-control" min="0" step=".0001"/>
-          </div>
-          <div class="form-group">
-            <label for="tx-amount">Amount to send:</label>
-            <input type="number" name="tx-amount" class="tx-amount form-control" min="0" />
-          </div>
-          <button class="btn btn-success pull-right" data-action="sendTx">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Create Multisig Wallet</h3>
-      </div>
-      <div class="panel-body">
-        <form class="send transaction">
-          <div class="form-group">
-            <label for="walletId">Wallet ID to Send From: </label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="walletId">Wallet Passphrase</label>
-            <input type="password" name="passphrase" class="wallet-passphrase form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="n">Number of potential signers (N)</label>
-            <input type="number" name="n" class="wallet-n form-control" value="3" />
-          </div>
-          <div class="form-group">
-            <label for="m">Minimum number of signers (M)</label>
-            <input type="number" name="m" class="wallet-m form-control" value="2" />
-          </div>
-          <button class="btn btn-success pull-right" data-action="createMultisig">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Add xpubkey/accountKey to Multisig</h3>
-      </div>
-      <div class="panel-body">
-        <form class="add multisig-address">
-          <div class="form-group">
-            <label for="walletId">Target Wallet:</label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="accountKey">Public Key:</label>
-            <input type="text" name="accountKey" class="key public-key form-control" />
-          </div>
-          <button class="btn btn-success pull-right" data-action="addKey">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Template TX (useful for multisig)</h3>
-      </div>
-      <div class="panel-body">
-        <form class="send transaction">
-          <div class="form-group">
-            <label for="walletId">Wallet ID to Send From: </label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="walletId">Wallet Passphrase</label>
-            <input type="password" name="passphrase" class="wallet-passphrase form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="destination">Destination Address:</label>
-            <input type="text" name="destination" class="tx-address form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="fee">TX Fee Rate (per KB):</label>
-            <input type="number" name="fee" class="tx-fee form-control" min="0" step=".0001"/>
-          </div>
-          <div class="form-group">
-            <label for="tx-amount">Amount to send:</label>
-            <input type="number" name="tx-amount" class="tx-amount form-control" min="0" />
-          </div>
-          <button class="btn btn-success pull-right" data-action="createTx">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3>Sign TX (useful for multisig)</h3>
-      </div>
-      <div class="panel-body">
-        <form class="send transaction" id="signTx">
-          <div class="form-group">
-            <label for="walletId">Wallet ID to Send From: </label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="walletId">Wallet Passphrase</label>
-            <input type="password" name="passphrase" class="wallet-passphrase form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="tx">Transaction:</label>
-            <textarea name="tx" form="signTx" class="tx form-control"></textarea>
-          </div>
-          <button class="btn btn-success pull-right" data-action="signTx">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
+  
 
 
   <div class="row">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3>Add Data to the Blockchain (OP_RETURN)</h3>
+        <h3>Add magnets to blockchain</h3>
       </div>
       <div class="panel-body">
-        <form class="add data" id="addData">
+
           <div class="form-group">
-            <label for="walletId">Wallet ID to Send From: </label>
-            <input type="text" name="walletId" class="wallet-id form-control" />
-          </div>
-          <div class="form-group">
-            <label for="walletId">Wallet Passphrase</label>
-            <input type="password" name="passphrase" class="wallet-passphrase form-control"/>
-          </div>
-          <div class="form-group">
-             <label for="fee">TX Fee Rate (per KB):</label>
-             <input type="number" name="fee" class="tx-fee form-control" min="0" step=".0001"/>
+             <label for="name">Torrent Name</label>
+             <input type="text" name="torrentname" class="form-control" id="torrentname"/>
           </div>
           <div class="form-group">
             <label for="data">Data:</label>
-            <textarea name="data" form="addData" class="data-field form-control"></textarea>
+            <input name="data" class="data-field form-control" id="data" />
           </div>
-          <button class="btn btn-success pull-right" data-action="addData">Submit</button>
-        </form>
+          <button class="btn btn-primary" name="batch" id="batch" onclick="window.addToBatch()">Add To Batch</button>
+            <button type="submit" class="btn btn-success pull-right" onclick="window.submitAction()">Submit</button>
       </div>
     </div>
   </div>
