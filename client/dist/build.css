@@ -7,3 +7,8 @@ a img {
   margin: 0 auto;
   border: none;
 }
+
+#tableDiv {
+	width:70%;
+	margin:auto;
+}
