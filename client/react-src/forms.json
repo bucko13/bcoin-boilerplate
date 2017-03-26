@@ -90,12 +90,12 @@
     ]
   },
   {
-    "title": "Get Data from the Blockchain (OP_RETURN)",
-    "actionName": "getData",
+    "title": "Torrent Search",
+    "actionName": "searchData",
     "formInputs": [
       {
-        "label": "Transaction Hash to Retrieve From:",
-        "name": "hash",
+        "label": "Keywords",
+        "name": "keywordId",
         "type": "text"
       }
     ]

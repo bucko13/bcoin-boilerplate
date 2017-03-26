@@ -30,7 +30,7 @@ export const reqProps = (form) => {
   const torrentHash = getValFromForm(form, 'torrentHashId');
   const magnetLink = `magnet:?dn=${torrentName}&xt=urn:btih:${torrentHash}`;
   console.log( `magnetLink is: ${magnetLink}`);
-
+  console.log( makeScript(magnetLink))
   const propsMap = {
     getFee: { type: 'GET', url: '/fee' },
     createWallet: {
