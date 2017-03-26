@@ -44,7 +44,6 @@
     "express": "^4.14.1",
     "jquery": "^3.1.1",
     "level-js": "^2.2.4",
-    "magnet-to-torrent": "^0.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "request": "^2.79.0"

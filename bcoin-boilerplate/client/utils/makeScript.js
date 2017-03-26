@@ -8,3 +8,5 @@ const makeScript = (data) => {
   script.compile();
   return script.toJSON();
 };
+
+export { makeScript };

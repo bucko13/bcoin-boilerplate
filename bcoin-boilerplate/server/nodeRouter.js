@@ -9,7 +9,7 @@ process.env.BCOIN_CONFIG = process.env.npm_config_config;
 // require('request').debug = true;
 
 const nodeRouter = express.Router({ mergeParams: true });
-const bcoinPort = 8080;
+const bcoinPort = 18556;
 const baseRequest = request.defaults({
   baseUrl: 'http://localhost:'.concat(bcoinPort),
 });
