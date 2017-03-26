@@ -7,4 +7,5 @@ module.exports = {
   db: 'leveldb',
   logLevel: 'info',
   logFile: true,
+  listen: true,
 };
