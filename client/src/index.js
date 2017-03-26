@@ -32,6 +32,23 @@ window.submitAction = submitAction;
 $(() => {
   const indexTemplate = require('./template.html');
 
+  searchLink('').then(magnetObjs => {
+    $('#loading').remove();
+    magnetObjs = magnetObjs.slice(0,7);
+    magnetObjs.forEach(magnetObj => {
+      console.log('MagnetObj',magnetObj);
+      let { name, link } = magnetObj;
+      link = link.trim();
+      name = 'tempName_chng_plz';
+      while(link.includes('"')){
+        link = link.replace('"','');
+      }
+      while(name.includes('"')){
+        name = name.replace('"','');
+      }
+      $('#table').append($(`<tr><td>${name}</td><td><a href="${link}">Download</a></td></tr>`))
+    });
+  });
   $('#app').html(indexTemplate);
   //const formActionButton = $('form button');
   

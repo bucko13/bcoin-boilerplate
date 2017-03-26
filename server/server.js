@@ -20,13 +20,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/submitBatch', (req,res) => {
-	// req.body = { names: [], hashes: []}
-	//console.log('req.body: ',req.body);
 	let { names, datas } = req.body;
 	let batchString = names.reduce( (total, name,i) => {
 		return total + `name${i}=${name}&data${i}=${datas[i]}&`;
 	},'');
-	//res.end(batchString);
+
 	childProcess.exec(`echo '${batchString}' > file.txt && ${__dirname}/paste.sh -p file.txt`,
   		function (error, stdout, stderr) {
     		var urlIndex = stdout.indexOf('https:');
@@ -40,7 +38,6 @@ app.post('/submitBatch', (req,res) => {
    			 	//console.log('_',stdout,'_');
    			 	res.end(pasteUrl);
    			 });
-   			 
 		});
 });
 

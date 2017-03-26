@@ -57,7 +57,7 @@ const fetchLink = (data) => {
     const options = {
       method: props.type,
       uri: props.url,
-      body: JSON.stringify(props.data),
+      body: props.data,
       json: true
     };
     // This is needed as creating a message doesn't allow JSON header to be set

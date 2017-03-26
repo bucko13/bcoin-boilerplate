@@ -22,7 +22,7 @@ export default function submitClick() {
   const url = '/submitBatch'; //nodeEndpoint.concat(reqPropsMap.url);
   const dataLength = window.batchData.names.length;
   const data = JSON.stringify({names: window.batchData.names, datas: window.batchData.datas }); //reqPropsMap.data ? JSON.stringify(reqPropsMap.data) : '';
-  console.log(dataLength);
+  //console.log(dataLength);
   
   $.ajax({
     type,

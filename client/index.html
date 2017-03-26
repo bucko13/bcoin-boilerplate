@@ -2,11 +2,49 @@
 <html>
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
   <link rel="stylesheet" href="/build.css">
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Blockchain Bay™</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container" role="main">
+  <h1>No Chain, No Gain!</h1>
+
+
+<div>
+	<div id="tableDiv" class="table-responsive">
+<table id="table" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Link</th>
+		</tr>
+	</thead>
+<tbody id="tbody">
+	<tr id="loading">
+		<td>Loading...</td>
+		<td>Loading...</td>
+	</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div id="app"></div>
 
+</div>
 <script src="/build.js"></script>
+
 </body>
 </html>
