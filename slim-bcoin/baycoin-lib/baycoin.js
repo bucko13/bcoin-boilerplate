@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.decompile = exports.fetchLink = undefined;
+exports.searchHash = exports.searchLink = exports.writeLink = undefined;
 
 var _stringify = require('babel-runtime/core-js/json/stringify');
 
@@ -39,8 +39,10 @@ var makeScript = function makeScript(data) {
   return script.toJSON();
 };
 
-// Routing Links
-var fetchLink = exports.fetchLink = function fetchLink(data) {
+// Routing Links 
+
+var fetchLink = function fetchLink(data) {
+
   var propsMap = {
     addData: {
       type: 'POST',
@@ -71,7 +73,7 @@ var fetchLink = exports.fetchLink = function fetchLink(data) {
     var options = {
       method: props.type,
       uri: props.url,
-      body: props.data,
+      body: (0, _stringify2.default)(props.data),
       json: true
     };
 
@@ -82,7 +84,7 @@ var fetchLink = exports.fetchLink = function fetchLink(data) {
   });
 };
 
-var decompile = exports.decompile = function decompile(hexx) {
+var decompile = function decompile(hexx) {
   var hex = hexx.toString(); //force conversion
   var str = '';
   for (var i = 0; i < hex.length; i += 2) {
@@ -90,14 +92,51 @@ var decompile = exports.decompile = function decompile(hexx) {
   }return str;
 };
 
-var writeMagnet = function writeMagnet(name, magnet) {
-  fetchLink({ type: 'addData', content: (0, _stringify2.default)({
-      name: name,
-      magnet: magnet
-    }) })
+var writeLink = function writeLink(link) {
+  return fetchLink({
+    type: 'addData',
+    content: (0, _stringify2.default)({ link: link })
+  })
   // Creating new data to blockchain
   .then(function (data) {
-    console.log('Here\'s your HASH: ' + data.hash);
+    //console.log(`Here's your data: ${data}`);
+    data = JSON.parse(data.toString());
+    //console.log(data['hash']);
+    return data.hash;
     // return Promise.resolve(data.hash);
   });
 };
+
+var searchHash = function searchHash(hash, name) {
+  return fetchLink({ type: 'getData', hash: hash }).then(function (data) {
+    if (!data.outputs) return;
+    try {
+      // Remove the first 4 bytes as that is the OP_RETURN
+      var json = JSON.parse(decompile(data.outputs[0].script.substring(4)));
+      if (!name || json.name.toUpperCase().includes(name.toUpperCase())) {
+        console.log('Hash: ' + data.hash);
+        // console.log(json);
+        return json;
+      }
+    } catch (err) {
+      // console.log(err);
+    }
+  });
+};
+
+var searchLink = function searchLink(name) {
+  fetchLink({ type: 'getTrans' }).then(function (data) {
+    // Loops through all data
+    return _promise2.default.all(data.map(function (b) {
+      return searchHash(b.hash, name);
+    })).then(function (data) {
+      return data.filter(function (b) {
+        return b;
+      });
+    });
+  });
+};
+
+exports.writeLink = writeLink;
+exports.searchLink = searchLink;
+exports.searchHash = searchHash;
