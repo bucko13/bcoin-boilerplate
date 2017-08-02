@@ -8,4 +8,5 @@ module.exports = {
   logLevel: 'info',
   logFile: true,
   listen: true,
+  prefix: '.bcoin-boilerplate',
 };

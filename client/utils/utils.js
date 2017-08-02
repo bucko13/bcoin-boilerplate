@@ -1,4 +1,6 @@
-import { mtx as MTX, script as Script } from 'bcoin';
+// import { mtx as MTX, script as Script } from 'bcoin';
+const Script = require('bcoin/lib/script/script');
+const MTX = require('bcoin/lib/primitives/mtx');
 
 const getValFromForm = (form, name, type = 'input') => {
   const el = form.querySelector(`${type}[name="${name}"]`);

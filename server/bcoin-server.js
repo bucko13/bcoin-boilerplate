@@ -20,7 +20,7 @@ if (process.env.npm_config_bcoin_node === 'spv') {
   node = new FullNode(config);
 }
 
-const walletdb = node.use(bcoin.walletplugin);
+const walletdb = node.use(bcoin.wallet.plugin);
 node.on('error', () => {
   ; // eslint-disable-line no-extra-semi
 });
