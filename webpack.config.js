@@ -1,31 +1,28 @@
 'use strict';
 
-const webpack = require('webpack')
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'src/client/app')
 
-const str = JSON.stringify;
-const env = process.env;
+const BUILD_DIR = path.resolve(__dirname, 'client/dist');
+const APP_DIR = path.resolve(__dirname, 'client/react-src');
 
 module.exports = {
   target: 'web',
-  entry: './client/react-src/index.js',
-  },
+  entry: path.resolve(APP_DIR, 'index.js'),
   output: {
-    path: path.join(__dirname, 'client','dist'),
-    filename: 'build.js'
+    path: BUILD_DIR,
+    filename: 'build.js',
   },
   resolve: {
     modules: ['node_modules'],
-    extensions: ['-browser.js', '.js', '.json']
+    extensions: ['-browser.js', '.js', '.json', '.jsx'],
   },
-  plugins: [
-    new UglifyJsPlugin({
-      compress: {
-        warnings: true
-      }
-    })
-  ]
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        include: APP_DIR,
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };

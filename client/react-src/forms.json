@@ -7,8 +7,8 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "text",
-      },
+        "type": "text"
+      }
     ]
   },
   {
@@ -19,14 +19,14 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "Wallet Passphrase",
         "name": "passphrase",
-        "type": "password",
-      },
-    ],
+        "type": "password"
+      }
+    ]
   },
   {
     "title": "Get New Address",
@@ -36,9 +36,9 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "text",
-      },
-    ],
+        "type": "text"
+      }
+    ]
   },
   {
     "title": "Create Multisig Wallet",
@@ -48,12 +48,12 @@
       {
         "label": "Wallet ID",
         "name": "walletId",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "Wallet Passphrase",
         "name": "passphrase",
-        "type": "password",
+        "type": "password"
       },
       {
         "label": "Number of potential signers (N)",
@@ -66,8 +66,8 @@
         "name": "m",
         "type": "number",
         "value":"2"
-      },
-    ],
+      }
+    ]
   },
   {
     "title": "Add xpubkey/accountKey to Multisig",
@@ -76,14 +76,14 @@
       {
         "label": "Target Wallet",
         "name": "walletId",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "Public Key:",
         "name": "accountKey",
-        "type": "text",
-      },
-    ],
+        "type": "text"
+      }
+    ]
   },
   {
     "title": "Send Transaction",
@@ -92,31 +92,31 @@
       {
         "label": "Wallet ID to Send From",
         "name": "walletId",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "Wallet Passphrase",
         "name": "passphrase",
-        "type": "password",
+        "type": "password"
       },
       {
         "label": "Destination Address",
         "name": "destination",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "TX Fee Rate (satoshis per kB)",
         "name": "fee",
         "type": "number",
         "min": "0",
-        "step": "100",
+        "step": "100"
       },
       {
         "label": "Amount to send (satoshis)",
         "name": "tx-amount",
-        "type": "number",
-      },
-    ],
+        "type": "number"
+      }
+    ]
   },
   {
     "title": "Create and Send Multisig Transaction",
@@ -125,34 +125,34 @@
       {
         "label": "Wallet ID to Send From",
         "name": "walletId",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "Wallet Passphrase",
         "name": "passphrase",
-        "type": "password",
+        "type": "password"
       },
       {
         "label": "Destination Address",
         "name": "destination",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "TX Fee Rate (satoshis per kB)",
         "name": "fee",
         "type": "number",
         "min": "0",
-        "step": "100",
+        "step": "100"
       },
       {
         "label": "Amount to send (satoshis)",
         "name": "tx-amount",
-        "type": "number",
+        "type": "number"
       },
       {
         "label": "Other signing wallets (each id on its own line, password on following line, blank line if no password)",
         "name": "signers",
-        "type": "textarea",
+        "type": "textarea"
       }
     ]
   },
@@ -163,26 +163,26 @@
       {
         "label": "Wallet ID to Send From",
         "name": "walletId",
-        "type": "text",
+        "type": "text"
       },
       {
         "label": "Wallet Passphrase",
         "name": "passphrase",
-        "type": "password",
+        "type": "password"
       },
       {
         "label": "TX Fee Rate (satoshis per kB)",
         "name": "fee",
         "type": "number",
         "min": "0",
-        "step": "100",
+        "step": "100"
       },
       {
         "label": "Data",
         "name": "data",
-        "type": "textarea",
-      },
-    ],
+        "type": "textarea"
+      }
+    ]
   },
   {
     "title": "Get Data from the Blockchain (OP_RETURN)",
@@ -191,8 +191,8 @@
       {
         "label": "Transaction Hash to Retrieve From:",
         "name": "hash",
-        "type": "text",
-      },
-    ],
-  },
-];
+        "type": "text"
+      }
+    ]
+  }
+]
