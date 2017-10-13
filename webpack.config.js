@@ -7,14 +7,18 @@ const APP_DIR = path.resolve(__dirname, 'client/react-src');
 
 module.exports = {
   target: 'web',
+  watch: true,
+  devtool: 'source-map',
   entry: path.resolve(APP_DIR, 'index.js'),
   output: {
     path: BUILD_DIR,
     filename: 'build.js',
   },
   resolve: {
-    modules: ['node_modules'],
     extensions: ['-browser.js', '.js', '.json', '.jsx'],
+    alias: {
+      bcoin: path.resolve(__dirname, 'node_modules/bcoin/lib/bcoin-browser'),
+    },
   },
   module: {
     loaders: [

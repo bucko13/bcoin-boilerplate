@@ -3,4 +3,5 @@
 node_modules/*
 /config.js
 build.js
+build.js.map
 **/npm-debug.log

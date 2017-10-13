@@ -7,7 +7,7 @@ const auth = require('basic-auth');
 process.env.BCOIN_CONFIG = process.env.npm_config_config;
 
 const nodeRouter = express.Router({ mergeParams: true });
-const bcoinPort = 18332;
+const bcoinPort = process.env.BCOIN_CONFIG.port;
 const baseRequest = request.defaults({
   baseUrl: 'http://localhost:'.concat(bcoinPort),
 });
