@@ -1,6 +1,6 @@
 {
   "name": "bcoin-boilerplate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A boilerplate repo to get started with a bcoin based project",
   "repository": {
     "type": "git",
