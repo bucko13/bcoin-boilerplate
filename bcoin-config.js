@@ -1,6 +1,5 @@
 module.exports = {
-  network: 'regtest',
-  port: 48332,
+  network: 'testnet',
   useWorkers: true,
   coinCache: 30000000,
   query: true,
@@ -9,5 +8,5 @@ module.exports = {
   logLevel: 'info',
   logFile: true,
   listen: true,
-  prefix: '~/.bcoin/boilerplate',
+  prefix: '~/.bcoin/boilerplate-testnet',
 };

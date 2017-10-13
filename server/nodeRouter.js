@@ -3,14 +3,14 @@
 const express = require('express');
 const request = require('request');
 const auth = require('basic-auth');
+const Client = require('bcoin').http.Client;
 
-process.env.BCOIN_CONFIG = process.env.npm_config_config;
+const config = require('../setup/setupUtils').getConfig();
 
+const bcoinClient = new Client({ network: config.network });
 const nodeRouter = express.Router({ mergeParams: true });
-const bcoinPort = process.env.BCOIN_CONFIG.port;
-const baseRequest = request.defaults({
-  baseUrl: 'http://localhost:'.concat(bcoinPort),
-});
+
+// custom route to get tx info since most of the time you won't be indexing
 nodeRouter.get('/tx/:hash', (req, res) => {
   const blockcypherEndpoint = 'https://api.blockcypher.com/v1/btc/test3/txs/'
     .concat(req.params.hash);
@@ -18,6 +18,7 @@ nodeRouter.get('/tx/:hash', (req, res) => {
     (err, response, body) => res.status(200).json(JSON.parse(body)));
 });
 
+// Primary router for preparing the requests to send to bcoin node
 nodeRouter.use((req, res) => {
   let authorization;
 
@@ -36,11 +37,15 @@ nodeRouter.use((req, res) => {
     qs: req.query,
     auth: authorization,
   };
+
+  const baseRequest = request.defaults({
+    baseUrl: bcoinClient.uri,
+  });
+
   baseRequest(options, (err, resp, body) => {
     if (err) {
       return res.status(400).send({ error: err });
     }
-
     return res.status(200).json(body);
   });
 });
