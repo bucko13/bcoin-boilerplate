@@ -1,6 +1,4 @@
-// import { mtx as MTX, script as Script } from 'bcoin';
-const Script = require('bcoin/lib/script/script');
-const MTX = require('bcoin/lib/primitives/mtx');
+import { mtx as MTX, script as Script } from 'bcoin';
 
 const getValFromForm = (form, name, type = 'input') => {
   const el = form.querySelector(`${type}[name="${name}"]`);
@@ -134,17 +132,12 @@ export const reqProps = (form) => {
 
 export const checkInputs = (action, form) => {
   const idField = form.querySelector('input[name="walletId"]');
-  const passphraseField = form.querySelector('input[name="passphrase"]');
+  // const passphraseField = form.querySelector('input[name="passphrase"]');
   const id = getValFromForm(form, 'walletId');
-  const passphrase = getValFromForm(form, 'passphrase');
+  // const passphrase = getValFromForm(form, 'passphrase');
 
   // some simple form validation
-  if (!!idField && !!passphraseField) {
-    if (!id.length || !passphrase.length) {
-      alert('Provide an id and a passphrase'); // eslint-disable-line no-alert, no-undef
-      return false;
-    }
-  } else if (!!idField && !id.length) {
+  if (!!idField && !id.length) {
     alert('Please provide a wallet id'); // eslint-disable-line no-alert, no-undef
     return false;
   }

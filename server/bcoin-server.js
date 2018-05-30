@@ -6,7 +6,6 @@ const assert = require('assert');
 
 const co = bcoin.utils.co;
 
-// const util = bcoin.util;
 const MTX = bcoin.mtx;
 const Script = bcoin.script;
 const Amount = bcoin.btc.Amount;
